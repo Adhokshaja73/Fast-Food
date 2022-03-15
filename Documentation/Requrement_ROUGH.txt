@@ -1,34 +1,39 @@
 Modules: 
 	1) Canteen Management
-		-> Update Menu
+		-> Update Menu       	   : Canteen owners should have option to update (add, edit, delete) the menu (Food menu) items.
 		-> Order management
-			-> Pending Orders 
-			-> Completed Orders
-			-> Update order status
-	2) User management
-		-> Select shop
-		-> Menu (Food menu)
-		-> Cart
-		-> deliver to particular class room (Nice to have)
-		-> Feedback
-		-> Track order status
-
+			-> Pending Orders      : Canteen owners should be able to see orders to be fulfilled.
+			-> Completed Orders 
+			-> Update order status : Canteen owners should be able to track past orders and change status of orders
+	
+	2) Customer management
+		-> Select shop         : Customers should get list of available shops in campus and select one of them
+		-> Menu (Food menu)	   : Customers should get the list of available items in selected shop 
+		-> Cart				   : Customers should be able to add multiple items to cart
+		-> Track order status  : Customers should be able to track the status of their orders
+		-> Delivery to class room :  (Nice to have) Customers should be able to request delivery to their classroom
+		-> Feedback			   : (Nice to have)
+		
 	4) Payment management
-	     -> Status
-	     -> Refund
+	     -> Status	: All involved parties should get status of payment
+	     -> Refund  : Handling Refunds on cancellation 
 	     -> Payment gateway integration
 
 	5) Login
-		-> Login for customers
-		-> Login for shops
+		-> Login and sign up for customers 
+		-> Login and sign up for shops
 
 
-
+Students :	
+	1) Shops
+	2) Students
 
 Entities: 
-	1) Users
-	2) Shops
-	3) Food Items
-	4) Orders
-	5) Payment
+	1) Students   (StudentID, Name, Course, Section)
+ 	2) Shops      (ShopID, ShopName, Description, .. . .)
+	3) FoodItem   (ShopID, Title, Description, Price)
+	4) OrderItems (OrderID, FoodItem, ItemCount)
+	5) Orders  	  (OrderID, Status, ShopID, StudentID, Notes)
+	6) Payment 	  (PaymentID, OrderID, Amount, Status, StudentID)
+	7) Login	  (StudentID, email, password hash)
 	
