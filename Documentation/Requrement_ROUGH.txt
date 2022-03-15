@@ -1,0 +1,34 @@
+Modules: 
+	1) Canteen Management
+		-> Update Menu
+		-> Order management
+			-> Pending Orders 
+			-> Completed Orders
+			-> Update order status
+	2) User management
+		-> Select shop
+		-> Menu (Food menu)
+		-> Cart
+		-> deliver to particular class room (Nice to have)
+		-> Feedback
+		-> Track order status
+
+	4) Payment management
+	     -> Status
+	     -> Refund
+	     -> Payment gateway integration
+
+	5) Login
+		-> Login for customers
+		-> Login for shops
+
+
+
+
+Entities: 
+	1) Users
+	2) Shops
+	3) Food Items
+	4) Orders
+	5) Payment
+	

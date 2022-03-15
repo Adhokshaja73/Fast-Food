@@ -1,0 +1,7 @@
+Chapter 1 : Requirement analysis
+			-> Use case diagram
+Chapter 2 : Design
+			-> Architectural diagram
+			-> ER Diagram
+Chapter 3 : 
+Chapter 4 : Testing  	
