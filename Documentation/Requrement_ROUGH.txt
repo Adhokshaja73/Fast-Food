@@ -20,8 +20,8 @@ Modules:
 	     -> Payment gateway integration
 
 	5) Login
-		-> Login and sign up for customers 
-		-> Login and sign up for shops
+		-> The system should proivde fecility to login and sign up for customers 
+		-> The system should provide fecility to login and sign up for shops
 
 
 Users :	
