@@ -1,43 +1,39 @@
-Modules: 
-	1) Canteen Management
-		-> Update Menu       	   : Canteen owners should have option to update the menu (Food menu) items.
-		-> Order management
-			-> Pending Orders      : Canteen owners should be able to see orders to be fulfilled.
-			-> Completed Orders 
-			-> Update order status : Canteen owners should be able to track past orders and change status of orders
+Modules:
+
+	1)	Login
+			-> The system must proivde facility to login and sign up for customers. 
+			-> The system must provide facility to login and sign up for shops
+				-> If username and password matches user should be able to login.
+				-> System must provide facility to reset the password.
+ 
+	2) 	Canteen Management
+				->The system must provide facility for canteen owners to update the menu (Food menu).
+			 	->The system must provide  facility for canteen owners to see the orders.
+				-> The system should provide canteen owners to track past orders and change status of orders.
 	
-	2) Customer management
-		-> Select shop         : Customers should get list of available shops in campus and select one of them
-		-> Menu (Food menu)	   : Customers should get the list of available items in selected shop 
-		-> Cart				   : Customers should be able to add multiple items to cart
-		-> Track order status  : Customers should be able to track the status of their orders
-		-> Delivery to class room :  (Nice to have) Customers should be able to request delivery to their classroom
-		-> Feedback			   : (Nice to have)
+	3) Customer management
+		-> System must provide facility to select the outlet from list given.
+		-> It must the list of available items in selected shop. 
+		-> System must provide facility for the customers to add multiple items to cart.
+		-> System should provide facility for the customers to track the status of their orders.
+		-> It is Nice to have the facility to request delivery to their classroom
+		-> System should provide the facility to get the feedback from users.
 		
 	4) Payment management
-	     -> Status	: All involved parties should get status of payment
-	     -> Refund  : Handling Refunds on cancellation 
-	     -> Payment gateway integration
+	     -> System must ensure all involved parties gets status of payment.
+	     -> System must provide facility for handling Refunds on cancellation. 
+	     -> Payment gateway integration.
 
-	5) Login
-		-> The system should proivde fecility to login and sign up for customers 
-		-> The system should provide fecility to login and sign up for shops
-
-
-Users :	
-	1) Chefs
+Students :	
+	1) Shops
 	2) Students
-	3) Managers
 
 Entities: 
-	1) Students   (StudentID, Name, Course, Section, email)
+	1) Students   (StudentID, Name, Course, Section)
  	2) Shops      (ShopID, ShopName, Description, .. . .)
 	3) FoodItem   (ShopID, Title, Description, Price)
 	4) OrderItems (OrderID, FoodItem, ItemCount)
 	5) Orders  	  (OrderID, Status, ShopID, StudentID, Notes)
 	6) Payment 	  (PaymentID, OrderID, Amount, Status, StudentID)
-	7) Login	  (email, passwordHash)
-	8) Employees (userID, Name, email, ShopID, role)
-	
-	
+	7) Login	  (StudentID, email, password hash)
 	
