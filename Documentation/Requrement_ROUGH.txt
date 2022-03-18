@@ -1,6 +1,6 @@
 Modules: 
 	1) Canteen Management
-		-> Update Menu       	   : Canteen owners should have option to update (add, edit, delete) the menu (Food menu) items.
+		-> Update Menu       	   : Canteen owners should have option to update the menu (Food menu) items.
 		-> Order management
 			-> Pending Orders      : Canteen owners should be able to see orders to be fulfilled.
 			-> Completed Orders 
@@ -24,16 +24,20 @@ Modules:
 		-> Login and sign up for shops
 
 
-Students :	
-	1) Shops
+Users :	
+	1) Chefs
 	2) Students
+	3) Managers
 
 Entities: 
-	1) Students   (StudentID, Name, Course, Section)
+	1) Students   (StudentID, Name, Course, Section, email)
  	2) Shops      (ShopID, ShopName, Description, .. . .)
 	3) FoodItem   (ShopID, Title, Description, Price)
 	4) OrderItems (OrderID, FoodItem, ItemCount)
 	5) Orders  	  (OrderID, Status, ShopID, StudentID, Notes)
 	6) Payment 	  (PaymentID, OrderID, Amount, Status, StudentID)
-	7) Login	  (StudentID, email, password hash)
+	7) Login	  (email, passwordHash)
+	8) Employees (userID, Name, email, ShopID, role)
+	
+	
 	
