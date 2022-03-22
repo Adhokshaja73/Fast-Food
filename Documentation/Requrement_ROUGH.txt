@@ -29,7 +29,7 @@ Students :
 	2) Students
 
 Entities: 
-	1) Students   (StudentID, Name, Course, Section)
+	1) Students   (student_id, name, email, phone)
  	2) Shops      (ShopID, ShopName, Description, .. . .)
 	3) FoodItem   (ShopID, Title, Description, Price)
 	4) OrderItems (OrderID, FoodItem, ItemCount)
