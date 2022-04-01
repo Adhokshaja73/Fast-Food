@@ -1,8 +1,0 @@
-Chapter 1 : Requirement Description
-			-> Use case diagram
-			-> Sequence diagram
-Chapter 2 : Design
-			-> Architectural diagram
-			-> ER Diagram
-Chapter 3 : 
-Chapter 4 : Testing  	
