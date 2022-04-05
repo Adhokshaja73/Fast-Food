@@ -1,5 +1,7 @@
 DROP DATABASE IF EXISTS FastFood;
+
 CREATE DATABASE FastFood;
+
 USE FastFood;
  
 CREATE TABLE `login`(
@@ -95,3 +97,4 @@ CREATE TABLE `off_days`(
     `end_time` TIME NOT NULL,
     PRIMARY KEY(`shop_id`)
 );
+
