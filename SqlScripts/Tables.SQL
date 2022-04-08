@@ -48,9 +48,9 @@ CREATE TABLE `shop`(
 
 CREATE TABLE `payments`(
     `payment_id` VARCHAR(10) NOT NULL,
-    `amount` INT(4) NOT NULL,
     `user_id` VARCHAR(10) NOT NULL,
     `shop_id` VARCHAR(10) NOT NULL,
+    `amount` INT(4) NOT NULL,
     `order_id` VARCHAR(10) NOT NULL,
     `status` INT(1) NOT NULL,
     PRIMARY KEY(`payment_id`)
@@ -97,4 +97,3 @@ CREATE TABLE `off_days`(
     `end_time` TIME NOT NULL,
     PRIMARY KEY(`shop_id`)
 );
-
