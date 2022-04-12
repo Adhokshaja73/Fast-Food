@@ -85,6 +85,7 @@ CREATE TABLE `food_item`(
     `price` FLOAT(4) NOT NULL,
     `name` CHAR(50) NOT NULL,
     `status` INT(1) NOT NULL,
+    `image_url` VARCHAR(100) NOT NULL,
     `category` CHAR(50),
     PRIMARY KEY(`item_id`)
 );
