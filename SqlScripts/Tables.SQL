@@ -6,7 +6,7 @@ USE FastFood;
  
 CREATE TABLE `login`(
     user_id VARCHAR(10) NOT NULL,
-    password_hash VARCHAR(64) NOT NULL,
+    password_hash VARCHAR(64) NOT NULL
 );
 
 
