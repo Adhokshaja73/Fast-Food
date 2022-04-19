@@ -36,4 +36,56 @@ Entities:
 	5) Orders  	  (OrderID, Status, ShopID, StudentID, Notes)
 	6) Payment 	  (PaymentID, OrderID, Amount, Status, StudentID)
 	7) Login	  (StudentID, email, password hash)
+
+
+
+
+Web Pages : 
+
+
+1) Registration page :	
+		Options to register for student : Collect name, email, collegeName
+		For canteen managers : Name, email, collegeName, outlet name, 
+
+1) Login :	
+		login fields : 
+			on successful login, go to apropriate user dashboard
+
+
+2) StudentView  :
+		1) HomePage :
+			 -> top selling items
+			 -> SearchBar
+			 -> Search Results
+		2) CartPage :
+			 -> Display items added to cart
+			 -> Proceed to payment	
+			 -> Option to remove item from cart
+		3) OrdersPage :
+			 -> List orders made by user 	 
+			 -> Each order should have it's status, title of items included, unique code etc.
+		4) ProfilePage :
+			 -> Give options to edit inof like name, email, college etc
+
+3) AdminView :
+		1) AdminDashboard :
+			2) Orders :
+					List all of the orders. New orders in top, filter to see older orders and a dedicated page to see orders for this
+					day and/or this hour.
+			3) PaymentStats : 
+					Show orders with payment info. Charts to show growth, most sold item etc. 
+			4) EditMenu : 
+					List all food items offered by all stores owned by the admin. Give options to add, edit (price, availability status) or
+					delete the food items.
+			5) ManageEmployees :
+					List all employees working for the shops owned by the admin, give options to add new 
+					and remove chefs. Also give options to allocate newOrders to chefs. See the orders
+					assigned to each chef.
+			6) ManageOutlets : 
+					List all outlets owned by the owner, Give options to add, edit and remove outlets
+
+4) ChefView :
+		1) AssignedOrders : Give options to change status of the order.
+
+
 	
