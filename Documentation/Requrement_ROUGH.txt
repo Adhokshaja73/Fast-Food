@@ -89,3 +89,9 @@ Web Pages :
 
 
 	
+
+	Django apps : 
+		1) home : Has landingPage, login and register Pages
+		2) User  : Has pages from StudentView
+		3) Admin : has pages from AdminView
+		4) chef  : has pages from chefView
