@@ -1,3 +1,4 @@
+import re
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -7,8 +8,17 @@ def home(request):
 
 
 def login(request):
-    return(HttpResponse('Login'))
+    return(render(request, 'login.html'))
 
 
 def register(request):
-    return(HttpResponse('register'))
+    return(render(request, 'register.html'))
+
+def validateUser(request):
+    print(request.POST)
+    userId = request.POST['mUser']
+    password = request.POST['mPass']
+    if(userId == "abcd" and password == "1234"):
+        return(render(request, 'new.html'))
+    else:
+        return(render(request, 'login.html', {'error' : 'Invalid UserName'}))
