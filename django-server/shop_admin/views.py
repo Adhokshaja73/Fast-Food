@@ -3,7 +3,7 @@ from django.http import HttpResponse
 # Create your views here.
 
 def orders(request):
-    return HttpResponse('orders')
+    return render(request, 'admindash.html')
 
 def payments(request):
     return HttpResponse('payments')
@@ -15,4 +15,4 @@ def manage_employees(request):
     return HttpResponse('Manage Employees')
 
 def manage_outlets(request):
-    return HttpResponse('Manage outlets')
+    return render(request , 'addnewshop.html')
