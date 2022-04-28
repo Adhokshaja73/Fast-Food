@@ -8228,7 +8228,7 @@ h1, h2, h3, h4, h5,
   border: none;
   height: 50px;
   color: white !important;
-  border: 1px solid transparent;
+  border: 1px solid black;
   background: rgba(255, 255, 255, 0.08);
   border-radius: 40px;
   padding-left: 20px;
@@ -8243,7 +8243,7 @@ h1, h2, h3, h4, h5,
       transition: none; } }
   .form-control::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
-    color: rgba(255, 255, 255, 0.8) !important; }
+    color: white !important; }
   .form-control::-moz-placeholder {
     /* Firefox 19+ */
     color: rgba(255, 255, 255, 0.8) !important; }
@@ -8254,7 +8254,7 @@ h1, h2, h3, h4, h5,
     /* Firefox 18- */
     color: rgba(255, 255, 255, 0.8) !important; }
   .form-control:hover, .form-control:focus {
-    background: transparent;
+    background:transparent;
     outline: none;
     -webkit-box-shadow: none;
     box-shadow: none;
