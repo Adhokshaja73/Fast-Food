@@ -1,10 +1,16 @@
+from pydoc_data.topics import topics
 import re
+from tempfile import tempdir
+from tkinter.tix import Select
 from django.shortcuts import render
 from django.http import HttpResponse
+from home.models import *
 
 # Create your views here.
-def home(request):
-    return(render(request, 'index.html'))
+def home(request):  
+    topItems = food_item.objects.all()
+    
+    return(render(request, 'index.html', {'topItems' : topItems}))
 
 
 def login(request):

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load static %}
+{% load static %} {% static "assets/food_images" as food_image%}
 
 <head>
     <meta charset="utf-8">
@@ -104,19 +104,19 @@
                 </div>
 
                 <div class="row">
-
+                    {% for item in topItems%}
                     <div class="col-lg-4">
                         <div class="box" data-aos="zoom-in" data-aos-delay="100">
-                            <img src="{% static 'assets/img/specials-1.png' %}" height="300" width="300" class="menu-img">
-                            <h6>Item Name</h6>
-                            <h6>Shop Name</h6>
-                            <h6>Price</h6>
+                            <img src="{{food_image}}/{{item.image_url}}" height="300" width="300" class="menu-img">
+                            <h6>{{item.name}}</h6>
+                            <h6>{{item.price }}</h6>
+                            <h6>{{item.shop.shop_name}}</h6>
                             <a href="book.html" class="book-a-table-btn scrollto d-none d-lg-flex">ORDER NOW</a>
                             <p></p>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
-
             </div>
         </section>
         <!-- End Why Us Section -->

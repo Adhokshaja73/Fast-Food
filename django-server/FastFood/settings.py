@@ -80,15 +80,17 @@ WSGI_APPLICATION = 'FastFood.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fastfood',
-        'USER'  : 'postgres',
+        'USER'  : 'root',
         'PASSWORD' : 'asdf1234',
         'HOST' : 'localhost',
     }
 }
 
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 

@@ -16,3 +16,4 @@ def manage_employees(request):
 
 def manage_outlets(request):
     return render(request , 'addnewshop.html')
+
