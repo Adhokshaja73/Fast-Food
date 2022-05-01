@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'user',
     'home',
     'shop_admin',
+    'allauth'
 ]
 
 MIDDLEWARE = [
