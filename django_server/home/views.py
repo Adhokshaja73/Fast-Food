@@ -75,9 +75,10 @@ def addToCart(request):
         if('cart' not in request.session):
             request.session['cart'] = []
         if(newItm not in request.session['cart']):
-            print(request.session['cart'])        
-            request.session['cart'].append(newItm)    
-        return(render(request, "userdash.html"))
+            request.session['cart'].append(newItm)  
+        print(request.session['cart'])        
+  
+        return(redirect("userdash.html"))
     else:
         print("Something wrong")
         return(redirect("userdash.html"))
@@ -87,7 +88,7 @@ def showCart(request):
         return(redirect("userdash.html"))
     items = []
     for i in request.session['cart']:
-        items.append(FoodItem.objects.filter(item_id = i))
+        items.append(FoodItem.objects.filter(item_id = i).get())
     return(render(request, 'cart.html', { 'foodItem' : items}))
 
 def placeOrderPage(request):
