@@ -119,6 +119,7 @@
             </tr>
         </thead>
         <tbody>
+            <form name="form">
             {% for item in foodItem %}
             <tr>
                 <td data-th="Product">
@@ -129,30 +130,31 @@
                         </div>
                     </div>
                 </td>
-                <form name="form">
                 <td><input type="text" data-th="Price" name="price"  disabled value="{{ item.price }}"></td>
                 <td data-th="Quantity">
                     
-                    <input type="number" oninput="myfunction()" class="form-control text-center" name="quantity" value="1">
+                    <input type="number" min="0" oninput="myfunction()" class="form-control text-center" name="quantity" value="1">
                </td>
                 {% with price=item.price qty=5 %}
                 <td data-th="Subtotal" class="text-center"><input type="text" disabled name="subtotal" value="{{ item.price }}"></td>
-                {% endwith %} </form>
+                {% endwith %} 
                 <td class="actions" data-th="">
                     <button class="btn btn-info btn-sm"><i style="display: block;"></i></button>
                     <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
                 </td>
             </tr>
+            <script>
+            
+            </script>
             {% endfor %}
+        </form>
         </tbody>
         <tfoot>
-            <tr class="visible-xs">
-                <td class="text-center"><strong>Total 1.99</strong></td>
-            </tr>
+           
             <tr>
                 <td><a href="userdash.html" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                 <td colspan="2" class="hidden-xs"></td>
-                <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
+                <td class="hidden-xs text-center"><label><strong>Totel</strong></label> <input type="text" disabled id="totel" value=""></td>
                 <td><a href="placeorder.html" class="btn btn-success btn-block">Checkout<i class="fa fa-angle-right"></i></a></td>
             </tr>
         </tfoot>
@@ -162,11 +164,20 @@
 <script>
     function myfunction()
     {
-        quantity=document.form.quantity.value;
-        price=document.form.price.value;
-        document.form.subtotal.value=price*quantity;
+        /*var foodItem = JSON.parse("{{foodItem|escapejs}}");
+        for( var item in foodItem)
+        {
+            alert(item.price);
+            
+        }*/ 
 
-      
+        for(i=0;i<=2;i++)
+        {
+        quantity=document.form.quantity[i].value;
+        price=document.form.price[i].value;
+        document.form.subtotal[i].value=price*quantity;
+        }
+
 
     }
     
