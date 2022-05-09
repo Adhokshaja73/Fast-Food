@@ -88,12 +88,17 @@ def showCart(request):
     if('user' not in request.session):
         return(redirect("userdash.html"))
     items = request.COOKIES.get('cart')
+    print(type(items))
+    items = set(items[1:-1].replace("\"",'').split(","))
+
     foodItems = []
-    for i in cart:
-    
-        
-    print(items)
-    return(render(request, 'cart.html', { 'foodItem' : items}))
+
+    for i in items:
+        foodItems.append(FoodItem.objects.filter(item_id = i ).get())
+
+    print(foodItems)
+
+    return(render(request, 'cart.html', { 'foodItem' : foodItems}))
 
 def placeOrderPage(request):
     if('user' not in request.session):
