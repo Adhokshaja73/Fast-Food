@@ -129,13 +129,15 @@
                         </div>
                     </div>
                 </td>
-                <td data-th="Price">{{ item.price }}</td>
+                <form name="form">
+                <td><input type="text" data-th="Price" name="price"  disabled value="{{ item.price }}"></td>
                 <td data-th="Quantity">
-                    <input type="number" class="form-control text-center" name="quantity" value="1">
-                </td>
+                    
+                    <input type="number" oninput="myfunction()" class="form-control text-center" name="quantity" value="1">
+               </td>
                 {% with price=item.price qty=5 %}
-                <td data-th="Subtotal" class="text-center">{{ price }} {{ qty }} </td>
-                {% endwith %}
+                <td data-th="Subtotal" class="text-center"><input type="text" disabled name="subtotal" value="{{ item.price }}"></td>
+                {% endwith %} </form>
                 <td class="actions" data-th="">
                     <button class="btn btn-info btn-sm"><i style="display: block;"></i></button>
                     <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
@@ -157,4 +159,16 @@
     </table>
 </div>
 
+<script>
+    function myfunction()
+    {
+        quantity=document.form.quantity.value;
+        price=document.form.price.value;
+        document.form.subtotal.value=price*quantity;
+
+      
+
+    }
+    
+</script>
 </html>
