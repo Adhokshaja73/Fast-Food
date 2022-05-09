@@ -61,6 +61,7 @@ def logout(request):
     if('user' not in request.session):
         return(redirect("index.html"))
     del request.session['user']
+    del request.session['cart']
     return(redirect('login.html'))
 
 def userDash(request):
@@ -86,9 +87,8 @@ def addToCart(request):
 def showCart(request):
     if('user' not in request.session):
         return(redirect("userdash.html"))
-    items = []
-    for i in request.session['cart']:
-        items.append(FoodItem.objects.filter(item_id = i).get())
+    items = request.COOKIES.get('sessionid')
+    print(items)
     return(render(request, 'cart.html', { 'foodItem' : items}))
 
 def placeOrderPage(request):

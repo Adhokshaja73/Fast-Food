@@ -111,32 +111,30 @@
                     <h2></h2>
                     <p>TOP SELLING ITEMS</p>
                 </div>
-                {% for item in foodItems%}
+
                 <div class="row">
+                    {% for item in foodItems%}
                     <div class="col-lg-4">
                         <div class="box">
                             <img src="{{food_image}}/{{item.image_url}}" height="300" width="300" class="menu-img">
                             <h6>{{ item.name }}</h6>
                             <h6>{{ item.shop.shop_name }}</h6>
                             <h6>{{ item.price }}</h6>
-                            <form action="addToCart" method="post">
+                            <!-- <form action="addToCart('{{ item.item_id }}')" method="post">
                                 {% csrf_token %}
                                 <input hidden="true" name="item" value="{{ item.item_id }}">
                                 <input type="submit" title="Add to cart">
-                            </form>
+                            </form> -->
+                            <button onclick="addToCart('{{ item.item_id }}')">Add to cart</button>
                             <p></p>
                         </div>
                     </div>
                     {% endfor %}
 
                     <script>
-                        $('#form').submit(function(e) {
-                            $.post('/url/', $(this).serialize(), function(data) {
-                                $('.message').html(data.message);
-                                // of course you can do something more fancy with your respone
-                            });
-                            e.preventDefault();
-                        });
+                        function addToCart(itm) {
+                            //add itm to cookies.cart
+                        }
                     </script>
 
 
