@@ -133,7 +133,35 @@
 
                     <script>
                         function addToCart(itm) {
-                            //add itm to cookies.cart
+                            //add itm to window.Cookies.cart
+                            var cart = readCookie("cart")
+                            if (cart == "") {
+                                let arr = []
+                                var json_str = JSON.stringify(arr);
+                                document.cookie = "cart=" + json_str;
+                            }
+                            var json_str = readCookie('cart');
+                            var cart = JSON.parse(json_str);
+                            cart.push(itm)
+                            var json_str = JSON.stringify(cart);
+                            document.cookie = "cart=" + json_str;
+                            console.log(cart)
+                        }
+
+                        function readCookie(cname) {
+                            let name = cname + "=";
+                            let decodedCookie = decodeURIComponent(document.cookie);
+                            let ca = decodedCookie.split(';');
+                            for (let i = 0; i < ca.length; i++) {
+                                let c = ca[i];
+                                while (c.charAt(0) == ' ') {
+                                    c = c.substring(1);
+                                }
+                                if (c.indexOf(name) == 0) {
+                                    return c.substring(name.length, c.length);
+                                }
+                            }
+                            return "";
                         }
                     </script>
 

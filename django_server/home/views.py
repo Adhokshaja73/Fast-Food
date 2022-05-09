@@ -87,7 +87,11 @@ def addToCart(request):
 def showCart(request):
     if('user' not in request.session):
         return(redirect("userdash.html"))
-    items = request.COOKIES.get('sessionid')
+    items = request.COOKIES.get('cart')
+    foodItems = []
+    for i in cart:
+    
+        
     print(items)
     return(render(request, 'cart.html', { 'foodItem' : items}))
 
