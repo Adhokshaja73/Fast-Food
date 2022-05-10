@@ -28,7 +28,11 @@
     <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/add.css' %}" rel="stylesheet">
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+   
+    
+    
 
     <!-- =======================================================
   * Template Name: Restaurantly - v3.7.0
@@ -60,12 +64,7 @@
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    <li>
-                        <form action="" method="post">
-                            <input type="search" name="search" placeholder="Search here">
-                            <input type="button" style="box-shadow: inset;" value="Search">
-                        </form>
-                    </li>
+                   
                     <pre>                                    </pre>
                     <li><a class="nav-link scrollto" href="userdash.html">Home</a></li>
                     <li><a href="#"><span>Contact</span> <i ></i></a></li>
@@ -100,63 +99,60 @@
     <br>
     <main id="main">
 
-
-        <section class="">
-
-            <div class="page-wrapper bg-dark p-t-100 p-b-50" data-aos="fade-up">
-                <div>
-                    <div>
-                        <div ">
-                    <h6 class="title ">Add delivery details</h6>
+      
+    <section class="">
+    
+        <div class="page-wrapper bg-dark p-t-100 p-b-50" data-aos="fade-up">
+        <div class="wrapper wrapper--w900">
+            <div class="card card-6">
+                <div class="card-heading">
+                    <h6 class="title">Add Delivery Details</h6>
                 </div>
-                <div class="card-body ">
-                    <form method="POST ">
-                        <div class="form-row ">
-                            <div class="name ">Name</div>
-                            <div class="value ">
-                                <input class="input--style-6 " type="text " name="Outlet name " placeholder="Name ">
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="form-row">
+                            <div class="name">Name</div>
+                            <div class="value">
+                                <input class="input--style-6" type="text" name="name" placeholder="Name">
                             </div>
                         </div>
-                        <div class="form-row ">
-                            <div class="name ">Contact No</div>
-                            <div class="value ">
-                                <div class="input-group ">
-                                    <input class="input--style-6 " type="location " name="contact " placeholder="Mobile NO ">
+                        <div class="form-row">
+                            <div class="name">Location</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-6" type="location" name="location" placeholder="Location">
                                 </div>
                             </div>
                         </div>
-                        <div class="form-row ">
-                            <div class="name ">Email address</div>
-                            <div class="value ">
-                                <div class="input-group ">
-                                    <input class="input--style-6 " type="email " name="email " placeholder="example@email.com ">
+                        <div class="form-row">
+                            <div class="name">Date</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-6" type="date" name="date">
                                 </div>
                             </div>
                         </div>
-                        <div class="form-row ">
-                            <div class="name ">Location</div>
-                            <div class="value ">
-                                <div class="input-group ">
-                                    <textarea class="textarea--style-6 " name="description " placeholder="Address "></textarea>
+                        <div class="form-row">
+                            <div class="name">Time</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input  class="input--style-6" type="time" id="time">
                                 </div>
                             </div>
                         </div>
-                        <div class="form-row ">
-                            <div class="value ">
-                            <div class="name ">Date</div>
-                                <input class="input--style-6 " type="date">
-                            </div>
-                        </div>      
-                            <div class="value ">
-                            <div class="name ">Time</div>
-                            <input class="input--style-6 " type="time">
-                            </div>
+                        <div class="form-row">
+                            <div class="name">Special note</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <textarea class="input--style-6"></textarea>
+                                </div>
                             </div>
                         </div>
+                       
                     </form>
                 </div>
-                <div class="card-footer ">
-                    <a href=""><button  >Proceed to payment</button></a>
+                <div class="card-footer">
+                    <button class="btn btn--radius-2 btn--blue-2" type="submit">Proceed to payment</button>
                 </div>
             </div>
         </div>
