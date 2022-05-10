@@ -1,5 +1,6 @@
 from distutils.log import Log
 import re
+from urllib import response
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from hashlib import sha256
@@ -87,18 +88,23 @@ def addToCart(request):
 def showCart(request):
     if('user' not in request.session):
         return(redirect("userdash.html"))
-    items = request.COOKIES.get('cart')
-    print(type(items))
-    items = set(items[1:-1].replace("\"",'').split(","))
+    try:
+        items = request.COOKIES.get('cart')
+        items = set(items[1:-1].replace("\"",'').split(","))
+        print(items)
+        foodItems = []
+        print(request.COOKIES.get('cart'))
+        for i in items:
+            foodItems.append(FoodItem.objects.filter(item_id = i ).get())
+        print(foodItems)
+        response = render(request, 'cart.html', { 'foodItem' : foodItems}) 
+        return(response)
+    except Exception as e:
+        print(e)
+        return(render(request, 'cart.html', { 'msg' : "Cart is empty"}))
+    
 
-    foodItems = []
-
-    for i in items:
-        foodItems.append(FoodItem.objects.filter(item_id = i ).get())
-
-    print(foodItems)
-
-    return(render(request, 'cart.html', { 'foodItem' : foodItems}))
+    
 
 def placeOrderPage(request):
     if('user' not in request.session):

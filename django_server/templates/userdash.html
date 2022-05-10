@@ -146,12 +146,12 @@
                             var json_str = JSON.stringify(cart);
                             document.cookie = "cart=" + json_str;
                             console.log(cart)
-                            let text = "Item added to cart";
-                            if (confirm(text) == true) {
-                                location.href="http://127.0.0.1:8000/cart.html"
-                            } else {
-                                document.getElementById("addtocart").disabled = true;
-                            }
+                                //let text = "Item added to cart";
+                                //if (confirm(text) == true) {
+                                //    location.href="http://127.0.0.1:8000/cart.html"
+                                //} else {
+                                //    document.getElementById("addtocart").disabled = true;
+                                //}
                         }
 
                         function readCookie(cname) {

@@ -37,7 +37,7 @@
   ======================================================== -->
 </head>
 
-<body>
+<body onload="deleteCookie('cartMap')">
 
     <!-- ======= Top Bar ======= -->
     <div id="topbar" class="d-flex align-items-center fixed-top">
@@ -107,6 +107,9 @@
 <br>
 
 <!-- cart-->
+{% if msg %}
+<h1>Cart is empty</h1>
+{% else %}
 <div style="background-color: rgb(120, 123, 123);">
     <table id="cart" class="table table-hover table-condensed">
         <thead>
@@ -119,67 +122,97 @@
             </tr>
         </thead>
         <tbody>
+
             <form name="form">
-            {% for item in foodItem %}
-            <tr>
-                <td data-th="Product">
-                    <div class="row">
-                        <div class="col-sm-10">
-                            <h4 class="nomargin">{{ item.name }}</h4>
-                            <p>{{ item.shop.shop_name }}</p>
+                {% with size=foodItem|length %} {% for item in foodItem %}
+                <tr>
+                    <td data-th="Product">
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <h4 class="nomargin">{{ item.name }}</h4>
+                                <p>{{ item.shop.shop_name }}</p>
+                                <input hidden="true" name="itm" value="{{ item.item_id }}">
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td><input type="text" data-th="Price" name="price"  disabled value="{{ item.price }}"></td>
-                <td data-th="Quantity">
-                    
-                    <input type="number" min="0" oninput="myfunction()" class="form-control text-center" name="quantity" value="1">
-               </td>
-                {% with price=item.price qty=5 %}
-                <td data-th="Subtotal" class="text-center"><input type="text" disabled name="subtotal" value="{{ item.price }}"></td>
-                {% endwith %} 
-                <td class="actions" data-th="">
-                    <button class="btn btn-info btn-sm"><i style="display: block;"></i></button>
-                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
-                </td>
-            </tr>
-            <script>
-            
-            </script>
-            {% endfor %}
-        </form>
+                    </td>
+                    <td><input type="text" data-th="Price" name="price" disabled value="{{ item.price }}"></td>
+                    <td data-th="Quantity">
+                        <input type="number" min="0" oninput="updateCost('{{size}}')" class="form-control text-center" name="quantity" value="1">
+                    </td>
+                    <td data-th="Subtotal" class="text-center"><input type="text" disabled name="subtotal" value="{{ item.price }}"></td>
+                    <td class="actions" data-th="">
+                        <button class="btn btn-info btn-sm"><i style="display: block;"></i></button>
+                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                    </td>
+                </tr>
+                <script>
+                </script>
+                {% endfor %}
+            </form>
         </tbody>
         <tfoot>
-           
+
             <tr>
                 <td><a href="userdash.html" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                 <td colspan="2" class="hidden-xs"></td>
-                <td class="hidden-xs text-center"><label><strong>Totel</strong></label> <input type="text" disabled id="totel" value=""></td>
-                <td><a href="placeorder.html" class="btn btn-success btn-block">Checkout<i class="fa fa-angle-right"></i></a></td>
+                <td class="hidden-xs text-center"><label><strong>Total</strong></label> <input type="text" disabled id="totel" value=""></td>
+                <td><a class="btn btn-block" href="placeorder.html" onclick="storeCookie('{{ size }}')">Checkout<i class="fa fa-angle-right"></i></a></td>
             </tr>
         </tfoot>
     </table>
+    {% endwith %} {% endif %}
+
 </div>
 
 <script>
-    function myfunction()
-    {
-        /*var foodItem = JSON.parse("{{foodItem|escapejs}}");
-        for( var item in foodItem)
-        {
-            alert(item.price);
-            
-        }*/ 
-
-        for(i=0;i<=2;i++)
-        {
-        quantity=document.form.quantity[i].value;
-        price=document.form.price[i].value;
-        document.form.subtotal[i].value=price*quantity;
+    function updateCost(size) {
+        for (i = 0; i < size; i++) {
+            quantity = document.form.quantity[i].value;
+            price = document.form.price[i].value;
+            document.form.subtotal[i].value = price * quantity;
         }
-
-
     }
-    
+
+    function deleteCookie(name) {
+        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
+    function storeCookie(size) {
+        //add itm to window.Cookies.cart
+        let arr = []
+        var json_str = JSON.stringify(arr);
+        document.cookie = "cartMap=" + json_str;
+
+        for (i = 0; i < size; i++) {
+            quantity = document.form.quantity[i].value;
+            itm = document.form.itm[i].value;
+
+            var newArr = [itm, parseInt(quantity)]
+            console.log(newArr)
+
+            var json_str = readCookie("cartMap");
+            var cartMap = JSON.parse(json_str);
+            cartMap.push(newArr)
+            var json_str = JSON.stringify(cartMap);
+            document.cookie = "cartMap=" + json_str;
+        }
+    }
+
+    function readCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
 </script>
+
 </html>
