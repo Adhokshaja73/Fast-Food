@@ -115,6 +115,18 @@ def placeOrderPage(request):
 def vendorRegistrationPage(requst):
     return(HttpResponse("Vendor registration"))
 
+def addnewshop(request):
+    return(render(request, 'addnewshop.html'))
+
+def adminshop(request):
+    foodItems = Shop.objects.all()
+    return(render(request, "shopadmindash.html", { 'foodItems' : foodItems }))
+
+def profile(request):
+    return(render(request, 'profile.html'))
+
+def updateshop(request):
+    return(render(request, 'updateshop.html'))
 
 
 

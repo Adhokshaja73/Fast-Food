@@ -11,6 +11,10 @@ urlpatterns = [
     path('userdash.html', views.userDash),
     path('addToCart', views.addToCart),
     path('cart.html', views.showCart),
+    path('profile.html', views.profile),
     path('placeorder.html', views.placeOrderPage),
     path('logout', views.logout),
+    path('addnewshop',views.addnewshop),
+    path('adminshop',views.adminshop),
+    path('updateshop.html', views.updateshop),
 ]

@@ -60,6 +60,17 @@
                                 <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                 <span></span>
                             </div>
+                            <div class="">
+                            <div class="">
+                                <label for="role"> I am a:</label>
+                                <select name="role" oninput="get()" id="role">
+                                <option value="0">Student</option>
+                                <option value="1"> Shop Owner</option>
+                                </select>
+                            </div>
+                        </div>
+
+                            </div>
                             <div class="form-group">
                                 <button type="submit" class="form-control btn btn-primary submit px-3">Submit</button>
                             </div>
@@ -178,6 +189,16 @@
             if (document.getElementById('email').value == "") {
                 alert('Plzz fill email_id')
             }
+        }
+        function get()
+        {
+            var choise=document.getElementById('role');
+            if(choise.value==1)
+            {
+                document.getElementById('name').value="Outlet Name";
+
+            }
+            
         }
     </script>
 
