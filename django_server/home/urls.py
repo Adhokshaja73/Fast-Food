@@ -17,5 +17,6 @@ urlpatterns = [
     path('addnewshop',views.addnewshop),
     path('adminshop',views.adminshop),
     path('updateshop.html', views.updateshop),
-    path('showdetail',views.showdetail)
+    path('showdetail',views.showdetail),
+    path('shop_profile',views.shop_profile)
 ]

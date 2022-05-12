@@ -154,5 +154,8 @@ def updateshop(request):
 def showdetail(request):
     return(render(request,'showdetail.html'))
 
+def shop_profile(request):
+    return(render(request, 'shop_profile.html'))
+
 
 
