@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from hashlib import sha256
 from .models import *
+import random
 # Create your views here.
 
 def landingPage(request):
@@ -117,6 +118,28 @@ def vendorRegistrationPage(requst):
 
 def addnewshop(request):
     return(render(request, 'addnewshop.html'))
+        #shop_id=random.randrange(100, 200, 1)
+        #shop_name = request.POST["outlet_name"]
+        #location = request.POST["location"]
+        #desc=request.POST["description"]
+        #newshop = Shop(shop_id=1,shop_name = name,location=location,description=desc)
+        #newshop.save()
+        #return(render(request, "shopadmindash.html"))
+
+#def addnewShop(request):
+ #    if(request.method == "POST"):
+  #      return(render(request, 'userdash.html'))
+    #return(render(request, 'addnewshop.html'))
+    #if(request.method == "POST"):
+   
+        #shop_id=random.randrange(100, 200, 1)
+        #shop_name = request.POST["outlet_name"]
+        #location = request.POST["location"]
+        #desc=request.POST["description"]
+        #newshop = Shop(shop_id=1,shop_name = name,location=location,description=desc)
+        #newshop.save()
+        #return(render(request, "shopadmindash.html"))
+
 
 def adminshop(request):
     foodItems = Shop.objects.all()
@@ -127,6 +150,9 @@ def profile(request):
 
 def updateshop(request):
     return(render(request, 'updateshop.html'))
+
+def showdetail(request):
+    return(render(request,'showdetail.html'))
 
 
 

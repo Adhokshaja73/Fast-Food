@@ -17,4 +17,5 @@ urlpatterns = [
     path('addnewshop',views.addnewshop),
     path('adminshop',views.adminshop),
     path('updateshop.html', views.updateshop),
+    path('showdetail',views.showdetail)
 ]
