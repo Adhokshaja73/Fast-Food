@@ -18,5 +18,7 @@ urlpatterns = [
     path('adminshop',views.adminshop),
     path('updateshop.html', views.updateshop),
     path('showdetail',views.showdetail),
-    path('shop_profile',views.shop_profile)
+    path('shop_profile',views.shop_profile),
+    path('my_order',views.my_order),
+    path('payment',views.payment)
 ]
