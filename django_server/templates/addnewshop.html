@@ -72,14 +72,14 @@
   <header id="header" class="fixed-top d-flex align-items-cente">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
 
-        <h1 class="logo me-auto me-lg-0"><a href="">FASTFOOD</a></h1>
+        <h1 class="logo me-auto me-lg-0"><a href="adminshop.html">FASTFOOD</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
                 <pre>                                    </pre>
-                <li><a class="nav-link scrollto" href="http://127.0.0.1:8000/adminshop">Home</a></li>
+                <li><a class="nav-link scrollto" href="http://127.0.0.1:8000/adminshop.html">Home</a></li>
                 <li><a href="#"><span>Contact</span> <i ></i></a></li>
                 <li>
                     <li><a href=".html"><span>Manage Shop</span> <i ></i></a></li>
@@ -122,7 +122,7 @@
                 <h6 class="title">Add New Outlet</h6>
             </div>
             <div class="card-body">
-                <form method="POST">
+                <form method="POST" action="saveNewShop">
                     <div class="form-row">
                         <div class="name">Outlet name</div>
                         <div class="value">
@@ -164,11 +164,12 @@
                             <div class="label--desc">Upload image.... Max file size 50 MB</div>
                         </div>
                     </div>
+                    <div class="card-footer">
+                      <button class="btn btn--radius-2 btn--blue-2" type="submit">Add outlet</button>
+                  </div>
                 </form>
             </div>
-            <div class="card-footer">
-                <button class="btn btn--radius-2 btn--blue-2" type="submit">Add outlet</button>
-            </div>
+           
         </div>
     </div>
 </div>

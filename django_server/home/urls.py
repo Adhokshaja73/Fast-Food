@@ -13,10 +13,14 @@ urlpatterns = [
     path('cart.html', views.showCart),
     path('profile.html', views.profile),
     path('placeorder.html', views.placeOrderPage),
+    path('placeOrder', views.placeOrder ),
     path('logout', views.logout),
-    path('addnewshop',views.addnewshop),
-    path('adminshop',views.adminshop),
+    path('addnewshop.html',views.addnewshop),
+    path('saveNewShop',views.saveNewShop),
+    path('adminshop.html',views.adminshop),
     path('updateshop.html', views.updateshop),
     path('showdetail',views.showdetail),
-    path('shop_profile',views.shop_profile)
+    path('shop_profile',views.shop_profile),
+    path('payment.html',views.paymentPage),
+    path('make_payment',views.makePayment)
 ]

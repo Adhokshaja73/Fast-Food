@@ -1,6 +1,11 @@
-from distutils.log import Log
-import re
-from urllib import response
+
+from cgi import print_form
+from datetime import date, datetime
+from time import time
+from tkinter import NS
+from tkinter.messagebox import NO
+from unittest import addModuleCleanup
+from urllib import request, response
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from hashlib import sha256
@@ -29,7 +34,7 @@ def register(request):
         email = request.POST["email"]
         uName = request.POST["userName"]
         password = sha256(request.POST["password"].encode('utf-8')).hexdigest()
-        role = 1
+        role = request.POST["role"]
         newUser = User(user_name = name, user_id = uName, email = email, phone = phone, user_role = role)
         newUser.save()
         newLogin = Login.objects.create(user = newUser, password_hash = password)
@@ -63,14 +68,18 @@ def logout(request):
     if('user' not in request.session):
         return(redirect("index.html"))
     del request.session['user']
-    del request.session['cart']
     return(redirect('login.html'))
 
 def userDash(request):
     if('user' not in request.session):
         return(render(request, 'index.html'))
-    foodItems = FoodItem.objects.all()
-    return(render(request, "userdash.html", { 'foodItems' : foodItems }))
+    else:
+        currentUser = User.objects.filter(user_id = request.session['user']).get()
+        if(currentUser.user_role == 0 ):
+            foodItems = FoodItem.objects.all()
+            return(render(request, "userdash.html", { 'foodItems' : foodItems }))
+        else:
+            return(redirect("adminshop.html"))
 
 def addToCart(request):
     if(request.method == "POST"):
@@ -80,11 +89,11 @@ def addToCart(request):
         if(newItm not in request.session['cart']):
             request.session['cart'].append(newItm)  
         print(request.session['cart'])        
-  
         return(redirect("userdash.html"))
     else:
         print("Something wrong")
         return(redirect("userdash.html"))
+
 
 def showCart(request):
     if('user' not in request.session):
@@ -104,42 +113,76 @@ def showCart(request):
         print(e)
         return(render(request, 'cart.html', { 'msg' : "Cart is empty"}))
     
-
-    
-
 def placeOrderPage(request):
     if('user' not in request.session):
         return(redirect("userdash.html"))
     else:
         return(render(request, 'placeorder.html'))
 
+def placeOrder(request):
+    if('user' not in request.session):
+        redirect("index.html")
+    elif( request.method != "POST"):
+        print("Not post")
+        redirect("placeorder.html")
+    else:
+        cartMap = request.COOKIES.get("cartMap").replace("\"",'')[1:-1]
+        cartMap = str(cartMap.split(",")).replace('\'','').replace(" ",'')[1:-1].split(",");  
+        print(cartMap)
+        items = {}
+        for i in cartMap:
+            print(i)
+            curr = i[1:-1].split(":")
+            items[curr[0]] = int(curr[1])
+        print(items)
+
+
+        nOrderId = sha256((request.session['user'] + str(datetime.now())).encode('utf-8')).hexdigest()
+        nUser = User.objects.filter(user_id = request.session['user']).get()
+        nShop = Shop.objects.filter(shop_id = request.COOKIES.get('selectedShop')).get()
+        nOrder_status = 0
+        nNotes = request.POST['notes']
+        nOrder_date_time = datetime.now()
+        nDelivery_date_time = request.POST['date']+" "+request.POST['time']
+
+    
+        billAmt = 0
+
+        newOrder = Order(order_id = nOrderId, user = nUser, shop = nShop, order_status = nOrder_status, notes = nNotes, order_date_time = nOrder_date_time, delivery_date_time = nDelivery_date_time)
+        newOrder.save()
+        for i in items:
+            orderItem = OrderItem(order = newOrder, food_item = FoodItem.objects.filter(item_id = i).get(), item_count = items[i])
+            orderItem.save()
+            billAmt += FoodItem.objects.filter(item_id = i).get().price * items[i]
+        print("\n\n\n\n\n\n",billAmt)
+        nPayId = sha256(nOrderId.encode('utf-8')).hexdigest()
+        nPayment = Payments(payment_id = nPayId, user = nUser, shop = nShop, amount = billAmt, order = newOrder, status = 0)
+        nPayment.save()
+        return(redirect("payment.html"))
+
+
+def paymentPage(request):
+    return(render(request, "payment.html"))
+def makePayment(request):
+    return(redirect("userdash.html"))
+
 def vendorRegistrationPage(requst):
     return(HttpResponse("Vendor registration"))
 
 def addnewshop(request):
     return(render(request, 'addnewshop.html'))
-        #shop_id=random.randrange(100, 200, 1)
-        #shop_name = request.POST["outlet_name"]
-        #location = request.POST["location"]
-        #desc=request.POST["description"]
-        #newshop = Shop(shop_id=1,shop_name = name,location=location,description=desc)
-        #newshop.save()
-        #return(render(request, "shopadmindash.html"))
 
-#def addnewShop(request):
- #    if(request.method == "POST"):
-  #      return(render(request, 'userdash.html'))
-    #return(render(request, 'addnewshop.html'))
-    #if(request.method == "POST"):
-   
-        #shop_id=random.randrange(100, 200, 1)
-        #shop_name = request.POST["outlet_name"]
-        #location = request.POST["location"]
-        #desc=request.POST["description"]
-        #newshop = Shop(shop_id=1,shop_name = name,location=location,description=desc)
-        #newshop.save()
-        #return(render(request, "shopadmindash.html"))
-
+def saveNewShop(requet):
+    if(requet.method != 'POST'):
+        return(redirect("userdash.html"))
+    elif('user' in request.session):
+        currentUser = User.objects.filter(user_id = request.session['user']).get()
+        if(currentUser.user_role == 1 ):
+            pass
+        else:
+            return(redirect(""))
+    else:
+        return(redirect(""))
 
 def adminshop(request):
     foodItems = Shop.objects.all()

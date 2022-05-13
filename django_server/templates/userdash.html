@@ -12,7 +12,9 @@
 
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <!-- Favicons -->
@@ -35,7 +37,7 @@
   ======================================================== -->
 </head>
 
-<body>
+<body onload="deleteCookie('cart'); deleteCookie('selectedShop'); deleteCookie('cartMap')">
 
     <!-- ======= Top Bar ======= -->
     <div id="topbar" class="d-flex align-items-center fixed-top">
@@ -65,18 +67,20 @@
                     </li>
                     <pre>                                    </pre>
                     <li><a class="nav-link scrollto" href="userdash.html">Home</a></li>
-                    <li><a href="#"><span>Contact</span> <i ></i></a></li>
+                    <li><a href="#"><span>Contact</span> <i></i></a></li>
                     <li>
-                        <li><a href="cart.html"><span>My Cart</span> <i ></i></a></li>
-                        <pre> </pre>
+                    <li><a href="cart.html"><span>My Cart</span> <i></i></a></li>
+                    <pre> </pre>
                     </li>
                     <li>
                         <ul>
-                            <li class="dropdown"><a href="#"><span>My Account</span> <i class="bi bi-chevron-right"></i></a>
+                            <li class="dropdown"><a href="#"><span>My Account</span> <i
+                                        class="bi bi-chevron-right"></i></a>
                                 <ul>
                                     <li><a href="profile.html">My profile</a></li>
                                     <li><a href="#">My Orders</a></li>
-                                    <li><a href="logout"><button class="book-a-table-btn scrollto d-none d-lg-flex" style="background-color: rgb(13, 13, 21);">LOGOUT</button></a></li>
+                                    <li><a href="logout"><button class="book-a-table-btn scrollto d-none d-lg-flex"
+                                                style="background-color: rgb(13, 13, 21);">LOGOUT</button></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -125,35 +129,38 @@
                                 <input hidden="true" name="item" value="{{ item.item_id }}">
                                 <input type="submit" title="Add to cart">
                             </form> -->
-                            <input type="button" id="addtocart" onclick="addToCart('{{ item.item_id }}')" value="Add to Cart">
+                            <input type="button" id="addtocart" onclick="addToCart('{{ item.item_id }}', '{{ item.shop.shop_id }}')"
+                                value="Add to Cart">
                             <p></p>
                         </div>
                     </div>
                     {% endfor %}
 
                     <script>
-                        function addToCart(itm) {
+                        function addToCart(itm, shopId) {
                             //add itm to window.Cookies.cart
-                            var cart = readCookie("cart")
-                            if (cart == "") {
-                                let arr = []
-                                var json_str = JSON.stringify(arr);
+                            if (readCookie('selectedShop') == "" || readCookie('selectedShop') == shopId) {
+                                saveCookie(shopId)
+                                var cart = readCookie("cart")
+                                if (cart == "") {
+                                    let arr = []
+                                    var json_str = JSON.stringify(arr);
+                                    document.cookie = "cart=" + json_str;
+                                }
+                                var json_str = readCookie('cart');
+                                var cart = JSON.parse(json_str);
+                                cart.push(itm)
+                                var json_str = JSON.stringify(cart);
                                 document.cookie = "cart=" + json_str;
+                                console.log(cart)
                             }
-                            var json_str = readCookie('cart');
-                            var cart = JSON.parse(json_str);
-                            cart.push(itm)
-                            var json_str = JSON.stringify(cart);
-                            document.cookie = "cart=" + json_str;
-                            console.log(cart)
-                                //let text = "Item added to cart";
-                                //if (confirm(text) == true) {
-                                //    location.href="http://127.0.0.1:8000/cart.html"
-                                //} else {
-                                //    document.getElementById("addtocart").disabled = true;
-                                //}
+                            else if (readCookie('selectedShop') != shopId) {
+                                window.alert("Select items from only one shop. Refresh page to change selected shop");
+                            }
                         }
-
+                        function saveCookie(shopName) {
+                            document.cookie = "selectedShop=" + shopName
+                        }
                         function readCookie(cname) {
                             let name = cname + "=";
                             let decodedCookie = decodeURIComponent(document.cookie);
@@ -168,6 +175,9 @@
                                 }
                             }
                             return "";
+                        }
+                        function deleteCookie(name) {
+                            document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
                         }
                     </script>
 
@@ -217,7 +227,8 @@
     <!-- End Footer -->
 
     <div id="preloader"></div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
     <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>

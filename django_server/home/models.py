@@ -1,7 +1,7 @@
 from operator import mod
 from pyexpat import model
 from django.db import models
-
+from . import *
 # Create your models here.
 
 
@@ -9,9 +9,8 @@ class User(models.Model):
     USER_ROLES =  (
         (0,  "Student"),
         (1, "ShopAdmin"),
-        (2, "Chef")
     )
-    user_id = models.CharField( max_length =10, primary_key=True) 
+    user_id = models.CharField( max_length =256, primary_key=True) 
     user_name = models.CharField( max_length =50) 
     email = models.CharField( max_length =100) 
     phone = models.CharField( max_length =10)
@@ -29,7 +28,7 @@ class Login(models.Model):
 
 
 class Shop(models.Model):
-    shop_id = models.CharField( max_length =10, primary_key=True) 
+    shop_id = models.CharField( max_length =256, primary_key=True) 
     location = models.CharField( max_length =10) 
     shop_name = models.CharField (max_length = 20) 
     shop_description = models.CharField( max_length =100)
@@ -49,32 +48,15 @@ class Order(models.Model):
         (3, "Complete"),
         (-1, "Cancelled")
     )
-    order_id = models.CharField( max_length =10, primary_key=True) 
+    order_id = models.CharField( max_length =256, primary_key=True) 
     user = models.ForeignKey(User, on_delete=models.CASCADE) 
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
     order_status = models.IntegerField(choices = ORDER_STATUS) 
     notes = models.CharField( max_length =100)
-    order_date = models.DateField()
-    order= models.TimeField()
-    delivery_date = models.DateField() 
-    delivery = models.TimeField()
+    order_date_time = models.DateTimeField()
+    delivery_date_time = models.DateTimeField()
     def __str__(self):
         return (self.order_id)
-
-class ChefOrders(models.Model):
-    chef = models.ForeignKey(User, on_delete=models.CASCADE ) 
-    oder = models.ForeignKey(Order, on_delete=models.CASCADE) 
-    def __str__(self):
-        return (self.chef.user_name)
-
-
-
-class WorksFor(models.Model):
-    chef = models.ForeignKey(User, on_delete=models.CASCADE)
-    shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
-    def __str__(self):
-        return (self.chef.user_name +" works for " + self.shop.shop_name)
-
 
 
 class Payments(models.Model):
@@ -84,10 +66,10 @@ class Payments(models.Model):
         (2, "Complete"),
         (-1, "Cancelled")
     )
-    payment_id = models.CharField( max_length =10, primary_key=True) 
+    payment_id = models.CharField( max_length =256, primary_key=True) 
     user = models.ForeignKey(User, on_delete=models.CASCADE) 
     shop = models.ForeignKey(Shop , on_delete=models.CASCADE) 
-    amount = models.DecimalField( max_digits =5, decimal_places=3) 
+    amount = models.DecimalField( max_digits = 6, decimal_places=2) 
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     status = models.IntegerField(choices=PAYMENT_STATUS) 
 
@@ -97,7 +79,7 @@ class FoodItem(models.Model):
         (0, "Available"),
         (1, "Unavailable"),
     )
-    item_id = models.CharField( max_length =10, primary_key=True) 
+    item_id = models.CharField( max_length =256, primary_key=True) 
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE) 
     price = models.DecimalField(max_digits = 5, decimal_places=2) 
     name = models.CharField( max_length =50) 
