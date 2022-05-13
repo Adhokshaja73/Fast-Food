@@ -26,6 +26,9 @@
     <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
     <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/sweetalert.css' %}" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
     <!-- =======================================================
   * Template Name: Restaurantly - v3.7.0
@@ -75,7 +78,7 @@
                             <li class="dropdown"><a href="#"><span>My Account</span> <i class="bi bi-chevron-right"></i></a>
                                 <ul>
                                     <li><a href="profile.html">My profile</a></li>
-                                    <li><a href="#">My Orders</a></li>
+                                    <li><a href="my_order">My Orders</a></li>
                                     <li><a href="logout"><button class="book-a-table-btn scrollto d-none d-lg-flex" style="background-color: rgb(13, 13, 21);">LOGOUT</button></a></li>
                                 </ul>
                             </li>
@@ -146,6 +149,7 @@
                             var json_str = JSON.stringify(cart);
                             document.cookie = "cart=" + json_str;
                             console.log(cart)
+                            swal("Item Added to the cart!", "", "success");
                                 //let text = "Item added to cart";
                                 //if (confirm(text) == true) {
                                 //    location.href="http://127.0.0.1:8000/cart.html"
