@@ -200,5 +200,11 @@ def showdetail(request):
 def shop_profile(request):
     return(render(request, 'shop_profile.html'))
 
+def my_order(request):
+    return(render(request,'myorder.html'))
+
+def payment(request):
+    return(render(request, 'payment.html'))
+
 
 

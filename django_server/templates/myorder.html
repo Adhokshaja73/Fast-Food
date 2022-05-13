@@ -54,7 +54,7 @@
     <header id="header" class="fixed-top d-flex align-items-cente">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
 
-            <h1 class="logo me-auto me-lg-0"><a href="userdash.html">FASTFOOD</a></h1>
+            <h1 class="logo me-auto me-lg-0"><a href="">FASTFOOD</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -78,7 +78,7 @@
                             <li class="dropdown"><a href="#"><span>My Account</span> <i class="bi bi-chevron-right"></i></a>
                                 <ul>
                                     <li><a href="#">My profile</a></li>
-                                    <li><a href="my_order">My Orders</a></li>
+                                    <li><a href="#">My Orders</a></li>
                                     <li><a href="logout"><button class="book-a-table-btn scrollto d-none d-lg-flex" style="background-color: rgb(13, 13, 21);">LOGOUT</button></a></li>
                                 </ul>
                             </li>
@@ -118,7 +118,6 @@
                 <th style="width:50%">Product</th>
                 <th style="width:10%">Price</th>
                 <th style="width:8%">Quantity</th>
-                <th style="width:22%" class="text-center">Subtotal</th>
                 <th style="width:10%"></th>
             </tr>
         </thead>
@@ -154,7 +153,6 @@
                 <td><a href="userdash.html" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                 <td colspan="2" class="hidden-xs"></td>
                 <td class="hidden-xs text-center"><label><strong>Total</strong></label> <input type="text" disabled id="total"></td>
-                <td><a class="btn btn-block" href="placeorder.html" onclick="storeCookie('{{ size }}')">Checkout<i class="fa fa-angle-right"></i></a></td>
             </tr>
         </tfoot>
     </table>
@@ -214,7 +212,7 @@
             quantity = document.form.quantity[i].value;
             itm = document.form.itm[i].value;
 
-            var newArr = [itm+ ":"+ parseInt(quantity)]
+            var newArr = [itm, parseInt(quantity)]
             console.log(newArr)
 
             var json_str = readCookie("cartMap");
