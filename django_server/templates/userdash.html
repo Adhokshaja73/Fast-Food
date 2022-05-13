@@ -28,6 +28,9 @@
     <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
     <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/sweetalert.css' %}" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
     <!-- =======================================================
   * Template Name: Restaurantly - v3.7.0
@@ -78,9 +81,8 @@
                                         class="bi bi-chevron-right"></i></a>
                                 <ul>
                                     <li><a href="profile.html">My profile</a></li>
-                                    <li><a href="#">My Orders</a></li>
-                                    <li><a href="logout"><button class="book-a-table-btn scrollto d-none d-lg-flex"
-                                                style="background-color: rgb(13, 13, 21);">LOGOUT</button></a></li>
+                                    <li><a href="my_order">My Orders</a></li>
+                                    <li><a href="logout"><button class="book-a-table-btn scrollto d-none d-lg-flex" style="background-color: rgb(13, 13, 21);">LOGOUT</button></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -157,6 +159,19 @@
                             else if (readCookie('selectedShop') != shopId) {
                                 window.alert("Select items from only one shop. Refresh page to change selected shop");
                             }
+                            var json_str = readCookie('cart');
+                            var cart = JSON.parse(json_str);
+                            cart.push(itm)
+                            var json_str = JSON.stringify(cart);
+                            document.cookie = "cart=" + json_str;
+                            console.log(cart)
+                            swal("Item Added to the cart!", "", "success");
+                                //let text = "Item added to cart";
+                                //if (confirm(text) == true) {
+                                //    location.href="http://127.0.0.1:8000/cart.html"
+                                //} else {
+                                //    document.getElementById("addtocart").disabled = true;
+                                //}
                         }
                         function saveCookie(shopName) {
                             document.cookie = "selectedShop=" + shopName
