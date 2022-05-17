@@ -24,5 +24,8 @@ urlpatterns = [
     path('payment.html',views.paymentPage),
     path('make_payment',views.makePayment),
     path('my_order',views.my_order),
-    path('payment',views.payment)
+    path('payment',views.payment),
+    path('additem.html',views.additem),
+    path('updateitem',views.updateitem)
+
 ]
