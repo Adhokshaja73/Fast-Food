@@ -185,8 +185,15 @@ def saveNewShop(requet):
         return(redirect(""))
 
 def adminshop(request):
-    foodItems = Shop.objects.all()
-    return(render(request, "shopadmindash.html", { 'foodItems' : foodItems }))
+    return(render(request, "shopadmindash.html"))
+
+def additem(request):
+    return(render(request,'additem.html'))
+
+def updateitem(request):
+    return(render(request, 'updateitem.html'))
+
+
 
 def profile(request):
     return(render(request, 'profile.html'))
@@ -205,6 +212,8 @@ def my_order(request):
 
 def payment(request):
     return(render(request, 'payment.html'))
+
+
 
 
 
