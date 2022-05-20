@@ -59,7 +59,7 @@
                             <div class="">
                             <div class="">
                                 <label for="role"> I am a:</label>
-                                <select name="role" oninput="get()"  id="role">
+                                <select name="role"   id="role">
                                 <option value=0>Student</option>
                                 <option value=1> Shop Owner</option>
                                 </select>
@@ -185,16 +185,6 @@
             if (document.getElementById('email').value == "") {
                 alert('Plzz fill email_id')
             }
-        }
-        function get()
-        {
-            var choise=document.getElementById('role');
-            if(choise.value==1)
-            {
-                document.getElementById('name').value="Outlet Name";
-
-            }
-            
         }
     </script>
 
