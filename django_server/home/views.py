@@ -193,7 +193,11 @@ def additem(request):
 def updateitem(request):
     return(render(request, 'updateitem.html'))
 
+def orders(request):
+    return(render(request, 'orders.html'))
 
+def manageorder(request):
+    return(render(request, 'manageorder.html'))
 
 def profile(request):
     return(render(request, 'profile.html'))

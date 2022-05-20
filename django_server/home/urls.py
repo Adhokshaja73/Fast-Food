@@ -26,6 +26,8 @@ urlpatterns = [
     path('my_order',views.my_order),
     path('payment',views.payment),
     path('additem.html',views.additem),
-    path('updateitem',views.updateitem)
+    path('updateitem',views.updateitem),
+    path('manageorder',views.manageorder),
+    path('orders',views.orders)
 
 ]
