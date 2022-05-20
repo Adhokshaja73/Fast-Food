@@ -8,5 +8,6 @@ admin.site.register(Shop)
 admin.site.register(Payments)
 admin.site.register(Order)
 admin.site.register(OrderItem)
+admin.site.register(Owns)
 
 

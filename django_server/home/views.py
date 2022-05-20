@@ -1,5 +1,5 @@
 
-from datetime import datetime
+from datetime import date, datetime
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from hashlib import sha256
@@ -172,10 +172,13 @@ def addnewshop(request):
 
     if form.is_valid():
         form = form.save(commit=False)
-        form.save()
-        shopId = sha256((request.session['user'] + form.shop_id).encode('utf-8')).hexdigest()
-        newShop = Shop(shop_id = shopId, location = form.location, shop_description = form.shop_description, img = form.img)
-        return render(request, "shopadmindash.html")
+        shopId = sha256((request.session['user'] + str(datetime.now())).encode('utf-8')).hexdigest()
+        print(shopId)
+        newShop = Shop(shop_id = shopId, shop_name = form.shop_name ,location = form.location, shop_description = form.shop_description, img = form.img)
+        newShop.save()
+        newOwns = Owns(shop = newShop, admin = User.objects.filter(user_id = request.session['user']).get())
+        newOwns.save()
+        return redirect("adminshop.html")
 
     return render(request, 'addnewshop.html', {
         'form': form
@@ -187,6 +190,8 @@ def adminshop(request):
         return(render(request, "shopadmindash.html"))
     else:
         return(redirect("addnewshop.html"))
+
+        
 def additem(request):
     return(render(request,'additem.html'))
 
