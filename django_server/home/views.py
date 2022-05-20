@@ -1,10 +1,11 @@
 
 from datetime import date, datetime
+from unicodedata import category
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from hashlib import sha256
 
-from .forms import NewShopForm
+from .forms import NewItemForm, NewShopForm
 from .models import *
 import random
 # Create your views here.
@@ -193,8 +194,19 @@ def adminshop(request):
 
         
 def additem(request):
-    return(render(request,'additem.html'))
+    form = NewItemForm(request.POST, request.FILES)
+    print("FORM IS VALID = ", form.data)
 
+    if form.is_valid():
+        form = form.save(commit=False)
+        itemId = sha256((request.session['user'] + str(datetime.now())).encode('utf-8')).hexdigest()
+        currentShop = Owns.objects.filter(admin = request.session['user']).get().shop
+        newItem = FoodItem(item_id = itemId, shop = currentShop, price = form.price , name = form.name , status = 1, image = form.image, category = form.category  )
+        newItem.save()
+        return redirect("adminshop.html")
+    return render(request, 'addnewshop.html', {
+        'form': form
+    })
 def updateitem(request):
     return(render(request, 'updateitem.html'))
 

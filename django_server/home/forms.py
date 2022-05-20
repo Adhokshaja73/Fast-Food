@@ -7,3 +7,9 @@ class NewShopForm(forms.ModelForm):
     class Meta:
         model = Shop
         fields = ['location', 'shop_name', 'shop_description', 'img']
+
+class NewItemForm(forms.ModelForm):
+    #form for a particular user
+    class Meta:
+        model = FoodItem
+        fields = ['name', 'price', 'image', 'category']

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load static %} {% static "assets/food_images" as food_image%}
+{% load static %} {% static "../media" as food_image%}
 
 <head>
     <meta charset="utf-8">
@@ -122,7 +122,7 @@
                     {% for item in foodItems%}
                     <div class="col-lg-4">
                         <div class="box">
-                            <img src="{{food_image}}/{{item.image_url}}" height="300" width="300" class="menu-img">
+                            <img src="{{food_image}}/{{item.image}}" height="300" width="300" class="menu-img">
                             <h6>{{ item.name }}</h6>
                             <h6>{{ item.shop.shop_name }}</h6>
                             <h6>{{ item.price }}</h6>

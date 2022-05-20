@@ -32,7 +32,7 @@ class Shop(models.Model):
     location = models.CharField( max_length =10) 
     shop_name = models.CharField (max_length = 20) 
     shop_description = models.CharField( max_length =100)
-    img = models.ImageField(upload_to = "images/")
+    img = models.ImageField(upload_to = "images/shops/")
     def __str__(self):
         return (self.shop_name)
 
@@ -85,7 +85,7 @@ class FoodItem(models.Model):
     price = models.DecimalField(max_digits = 5, decimal_places=2) 
     name = models.CharField( max_length =50) 
     status = models.IntegerField(choices=AVAILABILITY_STATUS) 
-    image_url = models.CharField( max_length =500) 
+    image = models.FileField(upload_to="images/fooditems/")
     category = models.CharField( max_length =50)    
   
 
