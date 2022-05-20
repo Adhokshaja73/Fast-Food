@@ -25,7 +25,9 @@
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-4">
                     <div class="login-wrap p-0">
-
+                        {% if message %}
+                        <h2>{{ message }}</h2>
+                        {% endif %}
                         <form action="register" method="post" class="signin-form">
                             {% csrf_token %}
                             <div class="form-group">
@@ -57,9 +59,9 @@
                             <div class="">
                             <div class="">
                                 <label for="role"> I am a:</label>
-                                <select name="role" oninput="get()" id="role">
-                                <option value="0">Student</option>
-                                <option value="1"> Shop Owner</option>
+                                <select name="role" oninput="get()"  id="role">
+                                <option value=0>Student</option>
+                                <option value=1> Shop Owner</option>
                                 </select>
                             </div>
                         </div>

@@ -32,6 +32,7 @@ class Shop(models.Model):
     location = models.CharField( max_length =10) 
     shop_name = models.CharField (max_length = 20) 
     shop_description = models.CharField( max_length =100)
+    img = models.ImageField(upload_to = "images/")
     def __str__(self):
         return (self.shop_name)
 

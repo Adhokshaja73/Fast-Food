@@ -155,17 +155,14 @@
                                 var json_str = JSON.stringify(cart);
                                 document.cookie = "cart=" + json_str;
                                 console.log(cart)
+                                swal("Item Added to the cart!", "", "success");
+
                             }
+
                             else if (readCookie('selectedShop') != shopId) {
-                                window.alert("Select items from only one shop. Refresh page to change selected shop");
+                                swal("Select items from only one shop. Refresh page to change selected shop","", "error");
                             }
-                            var json_str = readCookie('cart');
-                            var cart = JSON.parse(json_str);
-                            cart.push(itm)
-                            var json_str = JSON.stringify(cart);
-                            document.cookie = "cart=" + json_str;
-                            console.log(cart)
-                            swal("Item Added to the cart!", "", "success");
+                    
                                 //let text = "Item added to cart";
                                 //if (confirm(text) == true) {
                                 //    location.href="http://127.0.0.1:8000/cart.html"
