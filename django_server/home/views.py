@@ -1,14 +1,10 @@
 
-from cgi import print_form
-from datetime import date, datetime
-from time import time
-from tkinter import NS
-from tkinter.messagebox import NO
-from unittest import addModuleCleanup
-from urllib import request, response
+from datetime import datetime
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from hashlib import sha256
+
+from .forms import NewShopForm
 from .models import *
 import random
 # Create your views here.
@@ -17,7 +13,6 @@ def landingPage(request):
     if('user' in request.session):
         return(redirect("userdash.html"))
     return(render(request, "index.html"))
-
 
 def registrationPage(request):
     if('user' in request.session):
@@ -38,8 +33,14 @@ def register(request):
         newUser = User(user_name = name, user_id = uName, email = email, phone = phone, user_role = role)
         newUser.save()
         newLogin = Login.objects.create(user = newUser, password_hash = password)
-        return(render(request, "login.html"))
-    return(HttpResponse(result))
+        newLogin.save()
+        request.session['user'] = uName
+        print("ROLE = ", role)
+        if(role == '0'):
+            return(redirect("userdash.html"))
+        else:
+            return(redirect("addnewshop.html"))
+    return(render(request, "register.html",{'message' : result}))
 
 def loginPage(request):
     if('user' in request.session):
@@ -62,7 +63,7 @@ def login(request):
                 loginStatus = "Wrong password"
         else:
             loginStatus = "User does not existS"
-    return(HttpResponse(loginStatus))
+    return(render(request, "login.html",{'message' : loginStatus}))
 
 def logout(request):
     if('user' not in request.session):
@@ -93,7 +94,6 @@ def addToCart(request):
     else:
         print("Something wrong")
         return(redirect("userdash.html"))
-
 
 def showCart(request):
     if('user' not in request.session):
@@ -160,50 +160,42 @@ def placeOrder(request):
         nPayment.save()
         return(redirect("payment.html"))
 
-
 def paymentPage(request):
     return(render(request, "payment.html"))
+
 def makePayment(request):
     return(redirect("userdash.html"))
 
-def vendorRegistrationPage(requst):
-    return(HttpResponse("Vendor registration"))
-
 def addnewshop(request):
-    return(render(request, 'addnewshop.html'))
+    form = NewShopForm(request.POST, request.FILES)
+    print("FORM IS VALID = ", form.data)
 
-def saveNewShop(requet):
-    if(requet.method != 'POST'):
-        return(redirect("userdash.html"))
-    elif('user' in request.session):
-        currentUser = User.objects.filter(user_id = request.session['user']).get()
-        if(currentUser.user_role == 1 ):
-            pass
-        else:
-            return(redirect(""))
-    else:
-        return(redirect(""))
+    if form.is_valid():
+        form = form.save(commit=False)
+        form.save()
+        shopId = sha256((request.session['user'] + form.shop_id).encode('utf-8')).hexdigest()
+        newShop = Shop(shop_id = shopId, location = form.location, shop_description = form.shop_description, img = form.img)
+        return render(request, "shopadmindash.html")
+
+    return render(request, 'addnewshop.html', {
+        'form': form
+    })
 
 def adminshop(request):
-    return(render(request, "shopadmindash.html"))
-
+    if(Owns.objects.filter(admin = request.session['user']).exists()):
+        ownedShop = Owns.objects.filter(admin = request.session['user'])
+        return(render(request, "shopadmindash.html"))
+    else:
+        return(redirect("addnewshop.html"))
 def additem(request):
     return(render(request,'additem.html'))
 
 def updateitem(request):
     return(render(request, 'updateitem.html'))
 
-def orders(request):
-    return(render(request, 'orders.html'))
-
-def manageorder(request):
-    return(render(request, 'manageorder.html'))
-
 def profile(request):
     return(render(request, 'profile.html'))
 
-def updateshop(request):
-    return(render(request, 'updateshop.html'))
 
 def showdetail(request):
     return(render(request,'showdetail.html'))
@@ -212,12 +204,8 @@ def shop_profile(request):
     return(render(request, 'shop_profile.html'))
 
 def my_order(request):
-    return(render(request,'myorder.html'))
+    orderList = Order.objects.filter(user = request.session['user'])
+    return(render(request,'myorder.html', {'orderList' : orderList}))
 
 def payment(request):
     return(render(request, 'payment.html'))
-
-
-
-
-
