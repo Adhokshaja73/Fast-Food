@@ -19,7 +19,7 @@ urlpatterns = [
     path('adminshop.html',views.adminshop),
     path('showdetail',views.showdetail),
     path('shop_profile',views.shop_profile),
-    path('payment.html',views.paymentPage),
+    path('payment.html',views.payment),
     path('make_payment',views.makePayment),
     path('my_order',views.my_order),
     path('payment',views.payment),
