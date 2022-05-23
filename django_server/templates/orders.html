@@ -101,25 +101,19 @@
 <br>
 
 <!-- cart-->
-{% if msg %}
-<h1>Cart is empty</h1>
-{% else %}
 <div style="background-color: rgb(120, 123, 123);">
     <table id="cart" class="table table-hover table-condensed">
         <thead>
             <tr>
                 <th style="width:50%">Product</th>
-                <th style="width:10%">Price</th>
-                <th style="width:8%">Quantity</th>
-                <th style="width:22%" class="text-center">Subtotal</th>
-                <th style="width:10%"></th>
+                <th style="width:30%">Price</th>
+                <th style="width:30%">Quantity</th>
+                <th style="width:20%"> Status</th>
             </tr>
         </thead>
         <tbody>
 
             <form name="form">
-                {% with size=foodItem|length %} {% for item in foodItem %}
-
                 <tr>
                     <td data-th="Product">
                         <div class="row">
@@ -132,22 +126,31 @@
                     </td>
                     <td><input type="text" data-th="Price" name="price" disabled value="{{ item.price }}"></td>
                     <td data-th="Quantity">
-                        <input type="number" min="0" oninput="updateCost('{{size}}')" class="form-control text-center" name="quantity" value="1">
+                        <input type="text" name="quantity" disabled value="">
                     </td>
-                    <td data-th="Subtotal" class="text-center"><input type="text" disabled name="subtotal" value="{{ item.price }}"></td>
+                     <td data-th="status" >
+                        <select name="status" id="status">
+                            <option value="0">New</option>
+                            <option value="1">Processing</option>
+                            <option value="2">Ready to Serve</option>
+                            <option value="3">Complete</option>
+                            <option value="4">Cancelled</option>
+                          </select>
+                    </td>
                 </tr>
                 <script>
                 </script>
-                {% endfor %}
             </form>
         </tbody>
         <tfoot>
-
             <tr>
                 <td><a href="manageorder" class="btn btn-warning"><i class="fa fa-angle-left"></i> Back to Main Menu</a></td>
                 <td colspan="2" class="hidden-xs"></td>
-                <td class="hidden-xs text-center"><label><strong>Total</strong></label> <input type="text" disabled id="total"></td>
-                 </tr>
+                <td style="text-align: center;"> <label><strong>Total</strong></label></td>
+                <td class="hidden-xs text-center"><input type="text" disabled id="total"></td>
+                <td class="hidden-xs text-center"><input type="button" value="Update"></td>
+                
+            </tr>
         </tfoot>
     </table>
     <meta name="sizes" content="{{ size }}">
@@ -176,7 +179,6 @@
         }
         document.getElementById('total').value = total
     </script>
-    {% endwith %} {% endif %}
 
 </div>
 
