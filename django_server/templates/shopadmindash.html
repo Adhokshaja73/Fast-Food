@@ -64,7 +64,7 @@
                 <li><a class="nav-link scrollto" href="http://127.0.0.1:8000/adminshop.html">Home</a></li>
                 
                 <li>
-                    <li><a href=".html"><span>Manage Orders</span> <i ></i></a></li>
+                    <li><a href="manageorder"><span>Manage Orders</span> <i ></i></a></li>
                     <pre> </pre>
                 </li>
                 <li>
@@ -110,47 +110,98 @@
   <main id="menu">
         
     <!-- ======= Why Us Section ======= -->
-    <section id="menu" class="menu section-bg">
-      <div class="container" data-aos="fade-up">
+    <section id="Top-selling" class="why-us">
+      <div class="container">
 
-        <div class="section-title">
-          
-          <p>Menu</p>
-        </div>
-
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="menu-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-starters">Category1</li>
-              <li data-filter=".filter-salads">Category2</li>
-              <li data-filter=".filter-specialty">Category3</li>
-            </ul>
+          <div class="section-title">
+              <h2></h2>
+              <p>ITEMS</p>
           </div>
-        </div>
+          <div class="row">
+              {% for item in foodItems%}
+              <div class="col-lg-4">
+                  <div class="box">
+                      <img src="{{food_image}}/{{item.image}}" height="300" width="300" class="menu-img">
+                      <h6>{{ item.name }}</h6>
+                      <h6>{{ item.shop.shop_name }}</h6>
+                      <h6>{{ item.price }}</h6>
+                      <!-- <form action="addToCart('{{ item.item_id }}')" method="post">
+                          {% csrf_token %}
+                          <input hidden="true" name="item" value="{{ item.item_id }}">
+                          <input type="submit" title="Add to cart">
+                      </form> -->
+                      <input type="button" id="update" onclick=""
+                          value="Update">
+                      <p></p>
+                  </div>
+              </div>
+              {% endfor %}
 
-        <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+              <script>
+                  function addToCart(itm, shopId) {
+                      //add itm to window.Cookies.cart
+                      if (readCookie('selectedShop') == "" || readCookie('selectedShop') == shopId) {
+                          saveCookie(shopId)
+                          var cart = readCookie("cart")
+                          if (cart == "") {
+                              let arr = []
+                              var json_str = JSON.stringify(arr);
+                              document.cookie = "cart=" + json_str;
+                          }
+                          var json_str = readCookie('cart');
+                          var cart = JSON.parse(json_str);
+                          cart.push(itm)
+                          var json_str = JSON.stringify(cart);
+                          document.cookie = "cart=" + json_str;
+                          console.log(cart)
+                          swal("Item Added to the cart!", "", "success");
 
-          <div class="col-lg-6 menu-item filter-starters">
-            <img src="assets/img/menu/lobster-bisque.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="updateitem">Lobster Bisque</a><span>$5.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
-            </div>
+                      }
+
+                      else if (readCookie('selectedShop') != shopId) {
+                          swal("Select items from only one shop. Refresh page to change selected shop","", "error");
+                      }
+              
+                          //let text = "Item added to cart";
+                          //if (confirm(text) == true) {
+                          //    location.href="http://127.0.0.1:8000/cart.html"
+                          //} else {
+                          //    document.getElementById("addtocart").disabled = true;
+                          //}
+                  }
+                  function saveCookie(shopName) {
+                      document.cookie = "selectedShop=" + shopName
+                  }
+                  function readCookie(cname) {
+                      let name = cname + "=";
+                      let decodedCookie = decodeURIComponent(document.cookie);
+                      let ca = decodedCookie.split(';');
+                      for (let i = 0; i < ca.length; i++) {
+                          let c = ca[i];
+                          while (c.charAt(0) == ' ') {
+                              c = c.substring(1);
+                          }
+                          if (c.indexOf(name) == 0) {
+                              return c.substring(name.length, c.length);
+                          }
+                      }
+                      return "";
+                  }
+                  function deleteCookie(name) {
+                      document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                  }
+              </script>
+
+
+
           </div>
 
-          <div class="col-lg-6 menu-item filter-specialty">
-            <img src="assets/img/menu/bread-barrel.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="updateitem">Bread Barrel</a><span>$6.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
-            </div>
-          </div>
-    </section><!-- End Menu Section -->
+      </div>
+  </section>
+
+
+   
+    <!-- End Menu Section -->
     <div class="row">
       <div class="col-lg-2">  
       <div class="box" data-aos="zoom-in" data-aos-delay="100"></div>
