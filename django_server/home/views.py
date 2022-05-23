@@ -1,7 +1,7 @@
 
-from datetime import date, datetime
-from unicodedata import category
-from django.http import HttpResponse
+from datetime import datetime
+from os import stat
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from hashlib import sha256
 
@@ -186,11 +186,23 @@ def addnewshop(request):
 
 def adminshop(request):
     if(Owns.objects.filter(admin = request.session['user']).exists()):
-        ownedShop = Owns.objects.filter(admin = request.session['user'])
-        return(render(request, "shopadmindash.html"))
+        ownedShop = Owns.objects.filter(admin = request.session['user']).get().shop
+        foodItems = FoodItem.objects.filter(shop = ownedShop)
+
+        return(render(request, "shopadmindash.html", {'foodItems' : foodItems}))
     else:
         return(redirect("addnewshop.html"))
- 
+def listOrderItems(request, orderId):
+    currentOrder = Order.objects.filter(order_id = orderId).get()
+    foodItems = OrderItem.objects.filter(order = currentOrder)
+    return(render(request,'orders.html', {'order' : currentOrder, 'foodItems': foodItems}))
+
+def updateOrderStatus(request, orderId, status):
+    currentOrder = Order.objects.filter(order_id = orderId).get()
+    currentOrder.order_status = status
+    currentOrder.save()
+    return(redirect("/manageorder.html"))
+
 def additem(request):
     form = NewItemForm(request.POST, request.FILES)
     print("FORM IS VALID = ", form.data)
@@ -220,7 +232,26 @@ def shop_profile(request):
 
 def my_order(request):
     orderList = Order.objects.filter(user = request.session['user'])
-    return(render(request,'myorder.html', {'orderList' : orderList}))
+    itemList = {}
+    for i in orderList:
+        itemList[i.order_id] = []
+        items = OrderItem.objects.filter(order = i)
+        for j in items:
+            itemList[i.order_id].append(j.food_item.name)
+
+    return(render(request, "my_order.html",{'orderList' : orderList, 'itemList' : itemList}))
+
+def shop_order(request):
+    mShop = Owns.objects.filter(admin = User.objects.filter(user_id = request.session['user']).get()).get().shop
+    orderList = Order.objects.filter(shop = mShop)
+    itemList = {}
+    for i in orderList:
+        itemList[i.order_id] = []
+        items = OrderItem.objects.filter(order = i)
+        for j in items:
+            itemList[i.order_id].append(j.food_item.name)
+    
+    return(render(request, "manageorder.html",{'orderList' : orderList, 'itemList' : itemList}))
 
 def payment(request):
     if request.method == "POST":

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load static%} {% static "assets/food_images" as food_image%}
+{% load static%} {% static "../media" as food_image%}
 <html lang="en">
 
 <head>
@@ -15,7 +15,9 @@
   <link href="{% static 'assets/img/apple-touch-icon.png'%}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="{% static 'assets/vendor/animate.css/animate.min.css'%}" rel="stylesheet">
@@ -43,51 +45,52 @@
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex justify-content-center justify-content-md-between">
 
-      
 
-      
+
+
     </div>
   </div>
 
- 
+
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-cente">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
 
-        <h1 class="logo me-auto me-lg-0"><a href="adminshop.html">FASTFOOD</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      <h1 class="logo me-auto me-lg-0"><a href="adminshop.html">FASTFOOD</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-        <nav id="navbar" class="navbar order-last order-lg-0">
-            <ul>
-                <pre>                                                                               </pre>
-                <li><a class="nav-link scrollto" href="http://127.0.0.1:8000/adminshop.html">Home</a></li>
-                
-                <li>
-                    <li><a href="manageorder"><span>Manage Orders</span> <i ></i></a></li>
-                    <pre> </pre>
-                </li>
-                <li>
-                    <ul>
-                        <li class="dropdown"><a href="#"><span>My Account</span> <i class="bi bi-chevron-right"></i></a>
-                            <ul>
-                                <li><a href="shop_profile">My profile</a></li>
-                                <li><a href="logout"><button class="book-a-table-btn scrollto d-none d-lg-flex" style="background-color: rgb(13, 13, 21);">LOGOUT</button></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav>
-        <!-- .navbar -->
+      <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
+          <pre>                                                                               </pre>
+          <li><a class="nav-link scrollto" href="http://127.0.0.1:8000/adminshop.html">Home</a></li>
 
+          <li>
+          <li><a href="manageorder.html"><span>Manage Orders</span> <i></i></a></li>
+          <pre> </pre>
+          </li>
+          <li>
+            <ul>
+              <li class="dropdown"><a href="#"><span>My Account</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="shop_profile">My profile</a></li>
+                  <li><a href="logout"><button class="book-a-table-btn scrollto d-none d-lg-flex"
+                        style="background-color: rgb(13, 13, 21);">LOGOUT</button></a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
         </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+      <!-- .navbar -->
+      <ul>
+
+      </ul>
 
     </div>
-</header>
- <!-- End Header -->
+  </header>
+  <!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
@@ -96,122 +99,61 @@
         <div class="col-lg-8">
           <h1>Welcome to <span>FASTFOOD</span>
 
-          <div class="btns">
-            <a href="#menu" class="btn-book animated fadeInUp scrollto">Show Menu</a> 
-            <a href="updateshop.html" class="btn-book animated fadeInUp scrollto">Update Outlet</a>
-          </div>
-          
+            <div class="btns">
+              <a href="#menu" class="btn-book animated fadeInUp scrollto">Show Menu</a>
+            </div>
         </div>
-        
       </div>
     </div>
   </section><!-- End Hero -->
 
   <main id="menu">
-        
+
     <!-- ======= Why Us Section ======= -->
     <section id="Top-selling" class="why-us">
       <div class="container">
 
-          <div class="section-title">
-              <h2></h2>
-              <p>ITEMS</p>
-          </div>
-          <div class="row">
-              {% for item in foodItems%}
-              <div class="col-lg-4">
-                  <div class="box">
-                      <img src="{{food_image}}/{{item.image}}" height="300" width="300" class="menu-img">
-                      <h6>{{ item.name }}</h6>
-                      <h6>{{ item.shop.shop_name }}</h6>
-                      <h6>{{ item.price }}</h6>
-                      <!-- <form action="addToCart('{{ item.item_id }}')" method="post">
+        <div class="section-title">
+          <h2></h2>
+          <p>ITEMS</p>
+        </div>
+        <div class="row">
+          {% for item in foodItems%}
+          <div class="col-lg-4">
+            <div class="box">
+              <img src="{{food_image}}/{{item.image}}" height="300" width="300" class="menu-img">
+              <h6>{{ item.name }}</h6>
+              <h6>{{ item.shop.shop_name }}</h6>
+              <h6>{{ item.price }}</h6>
+              <!-- <form action="addToCart('{{ item.item_id }}')" method="post">
                           {% csrf_token %}
                           <input hidden="true" name="item" value="{{ item.item_id }}">
                           <input type="submit" title="Add to cart">
                       </form> -->
-                      <input type="button" id="update" onclick=""
-                          value="Update">
-                      <p></p>
-                  </div>
-              </div>
-              {% endfor %}
-
-              <script>
-                  function addToCart(itm, shopId) {
-                      //add itm to window.Cookies.cart
-                      if (readCookie('selectedShop') == "" || readCookie('selectedShop') == shopId) {
-                          saveCookie(shopId)
-                          var cart = readCookie("cart")
-                          if (cart == "") {
-                              let arr = []
-                              var json_str = JSON.stringify(arr);
-                              document.cookie = "cart=" + json_str;
-                          }
-                          var json_str = readCookie('cart');
-                          var cart = JSON.parse(json_str);
-                          cart.push(itm)
-                          var json_str = JSON.stringify(cart);
-                          document.cookie = "cart=" + json_str;
-                          console.log(cart)
-                          swal("Item Added to the cart!", "", "success");
-
-                      }
-
-                      else if (readCookie('selectedShop') != shopId) {
-                          swal("Select items from only one shop. Refresh page to change selected shop","", "error");
-                      }
-              
-                          //let text = "Item added to cart";
-                          //if (confirm(text) == true) {
-                          //    location.href="http://127.0.0.1:8000/cart.html"
-                          //} else {
-                          //    document.getElementById("addtocart").disabled = true;
-                          //}
-                  }
-                  function saveCookie(shopName) {
-                      document.cookie = "selectedShop=" + shopName
-                  }
-                  function readCookie(cname) {
-                      let name = cname + "=";
-                      let decodedCookie = decodeURIComponent(document.cookie);
-                      let ca = decodedCookie.split(';');
-                      for (let i = 0; i < ca.length; i++) {
-                          let c = ca[i];
-                          while (c.charAt(0) == ' ') {
-                              c = c.substring(1);
-                          }
-                          if (c.indexOf(name) == 0) {
-                              return c.substring(name.length, c.length);
-                          }
-                      }
-                      return "";
-                  }
-                  function deleteCookie(name) {
-                      document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-                  }
-              </script>
-
-
-
+              <input type="button" id="update" onclick="" value="Update">
+              <p></p>
+            </div>
           </div>
+          {% endfor %}
+
+        </div>
 
       </div>
-  </section>
+    </section>
 
 
-   
+
     <!-- End Menu Section -->
     <div class="row">
-      <div class="col-lg-2">  
-      <div class="box" data-aos="zoom-in" data-aos-delay="100"></div>
-      <a href="additem.html" class="book-a-table-btn scrollto d-none d-lg-flex">Add New Item</a>
-   </div> 
-   </div>
+      <div class="col-lg-2">
+        <div class="box" data-aos="zoom-in" data-aos-delay="100"></div>
+        <a href="additem.html" class="book-a-table-btn scrollto d-none d-lg-flex">Add New Item</a>
+      </div>
+    </div>
 
     <!-- End Why Us Section -->
 
-    
+
     <!--End session-->
 
 
@@ -231,7 +173,7 @@
                 Christ University Central Campus <br>
                 Bengaluru<br><br>
                 <strong>Phone:</strong> +91 9188578700<br>
-                <strong>Email:</strong> info@example.com<br >
+                <strong>Email:</strong> info@example.com<br>
                 <a href="">Contact US</a>
               </p>
               <div class="social-links mt-3">
@@ -244,7 +186,7 @@
             </div>
           </div>
 
-          
+
 
         </div>
       </div>
@@ -265,7 +207,8 @@
   </footer><!-- End Footer -->
 
   <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="{% static 'assets/vendor/aos/aos.js'%}"></script>
@@ -278,11 +221,10 @@
   <!-- Template Main JS File -->
   <script src="{% static 'assets/js/main.js'%}"></script>
   <script>
-      function get_detail(id)
-      {
-         //alert(id);
+    function get_detail(id) {
+      //alert(id);
 
-      }
+    }
   </script>
 
 </body>
