@@ -26,6 +26,8 @@ urlpatterns = [
     path('additem.html',views.additem),
     path('updateitem',views.updateitem),
     path('manageorder.html',views.shop_order),
+    path('my_order.html',views.my_order),
     path('list_order_items/<str:orderId>',views.listOrderItems),
+    path('/list_order_items_user/<str:orderId>',views.listOrderItemsUser),
     path('update_order_status/<str:orderId>/<int:status>',views.updateOrderStatus),
 ]

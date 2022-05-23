@@ -129,6 +129,7 @@
                 <td><a href="manageorder" class="btn btn-warning"><i class="fa fa-angle-left"></i> Back to Main Menu</a>
                 </td>
                 <td colspan="2" class="hidden-xs"></td>
+                {% if shopAdmin == True %}
                 <td data-th="status" >
                     <select name="status" id="status" onchange="updateStatus()">
                         <option value="0">New</option>
@@ -140,6 +141,7 @@
                 </td>
                 <td><a href="/update_order_status/{{ order.order_id }}/0" id="updateStatusLink" class="btn btn-warning"><i class="fa fa-angle-left"></i>Update Status</a>
                 </td>
+                {% endif %}
             </tr>
         </tfoot>
     </table>

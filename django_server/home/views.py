@@ -192,10 +192,17 @@ def adminshop(request):
         return(render(request, "shopadmindash.html", {'foodItems' : foodItems}))
     else:
         return(redirect("addnewshop.html"))
+
 def listOrderItems(request, orderId):
     currentOrder = Order.objects.filter(order_id = orderId).get()
     foodItems = OrderItem.objects.filter(order = currentOrder)
-    return(render(request,'orders.html', {'order' : currentOrder, 'foodItems': foodItems}))
+    return(render(request,'orders.html', {'order' : currentOrder, 'foodItems': foodItems, 'shopAdmin' : True}))
+
+
+def listOrderItemsUser(request, orderId):
+    currentOrder = Order.objects.filter(order_id = orderId).get()
+    foodItems = OrderItem.objects.filter(order = currentOrder)
+    return(render(request,'orders.html', {'order' : currentOrder, 'foodItems': foodItems, 'shopAdmin' : False}))
 
 def updateOrderStatus(request, orderId, status):
     currentOrder = Order.objects.filter(order_id = orderId).get()
@@ -239,19 +246,12 @@ def my_order(request):
         for j in items:
             itemList[i.order_id].append(j.food_item.name)
 
-    return(render(request, "my_order.html",{'orderList' : orderList, 'itemList' : itemList}))
+    return(render(request, "myorder.html",{'orderList' : orderList, 'itemList' : itemList}))
 
 def shop_order(request):
     mShop = Owns.objects.filter(admin = User.objects.filter(user_id = request.session['user']).get()).get().shop
     orderList = Order.objects.filter(shop = mShop)
-    itemList = {}
-    for i in orderList:
-        itemList[i.order_id] = []
-        items = OrderItem.objects.filter(order = i)
-        for j in items:
-            itemList[i.order_id].append(j.food_item.name)
-    
-    return(render(request, "manageorder.html",{'orderList' : orderList, 'itemList' : itemList}))
+    return(render(request, "manageorder.html",{'orderList' : orderList}))
 
 def payment(request):
     if request.method == "POST":
