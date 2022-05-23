@@ -5,12 +5,10 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from hashlib import sha256
 
-from .models import Payments, User
-
-from .forms import *
-import razorpay
-
-
+from .forms import NewItemForm, NewShopForm
+from .models import *
+import random
+# Create your views here.
 
 def landingPage(request):
     if('user' in request.session):
@@ -158,6 +156,9 @@ def placeOrder(request):
             orderItem.save()
             billAmt += FoodItem.objects.filter(item_id = i).get().price * items[i]
         print("\n\n\n\n\n\n",billAmt)
+        nPayId = sha256(nOrderId.encode('utf-8')).hexdigest()
+        nPayment = Payments(payment_id = nPayId, user = nUser, shop = nShop, amount = billAmt, order = newOrder, status = 0)
+        nPayment.save()
         return(redirect("payment.html"))
 
 def paymentPage(request):
@@ -190,7 +191,8 @@ def adminshop(request):
         return(render(request, "shopadmindash.html"))
     else:
         return(redirect("addnewshop.html"))
- 
+
+        
 def additem(request):
     form = NewItemForm(request.POST, request.FILES)
     print("FORM IS VALID = ", form.data)
@@ -202,15 +204,15 @@ def additem(request):
         newItem = FoodItem(item_id = itemId, shop = currentShop, price = form.price , name = form.name , status = 1, image = form.image, category = form.category  )
         newItem.save()
         return redirect("adminshop.html")
-    return render(request, 'additem.html', {
+    return render(request, 'addnewshop.html', {
         'form': form
     })
-
 def updateitem(request):
     return(render(request, 'updateitem.html'))
 
 def profile(request):
     return(render(request, 'profile.html'))
+
 
 def showdetail(request):
     return(render(request,'showdetail.html'))
@@ -223,24 +225,4 @@ def my_order(request):
     return(render(request,'myorder.html', {'orderList' : orderList}))
 
 def payment(request):
-    if request.method == "POST":
-        user = User.objects.filter(user_id = request.session['user']).get()
-        amount = request.POST.get("amount")
-        client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
-        razorpay_order = client.order.create(
-            {"amount": int(amount) * 100, "currency": "INR", "payment_capture": "1"}
-        )
-        order = Payments.objects.create(
-            user=user, amount=amount, provider_order_id= razorpay_order["id"]
-        )
-        order.save()
-        return render(
-            request,
-            "payment.html",
-            {
-                "callback_url": "http://" + "127.0.0.1:8000" + "/razorpay/callback/",
-                "razorpay_key": RAZORPAY_KEY_ID,
-                "order": order,
-            },
-        )
-    return render(request, "payment.html")
+    return(render(request, 'payment.html'))

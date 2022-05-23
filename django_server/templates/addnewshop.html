@@ -125,39 +125,59 @@
             <h6 class="title">Add New Outlet</h6>
           </div>
           <div class="card-body">
-
+            {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+              {% for field, errors in form.errors.items %}
+              {% for error in errors %}
+              <b>{{ field }}</b>: {{ error }}
+              {% endfor %}
+              {% endfor %}
+            </div>
+            {% endif %}
             <form enctype="multipart/form-data" method="POST" action="">
               {% csrf_token %}
-              <div class="form-row">
-                <div class="name">Outlet name</div>
-                {{ form.shop_name }}
-            </div>
-            <div class="form-row">
-                <div class="name">Location</div>
-                <div class="value">
-                   {{ form.location }}
-                </div>
-            </div>
-            
-            <div class="form-row">
-                <div class="name">Description</div>
-                <div class="value">
-                    {{ form.shop_description }}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="name">Upload Image</div>
-                <div class="value">
-                  {{ form.img }}  
-                </div>
-            </div>
-            <div class="card-footer">
-              <button class="btn btn--radius-2 btn--blue-2" type="submit">Add outlet</button>
-          </div>
+              {{ form.media }}
+              {{ form.as_p }}
               <input type="submit" value="Submit">
             </form>
             <!-- <form method="POST" action="saveNewShop">
+                    <div class="form-row">
+                        <div class="name">Outlet name</div>
+                        <div class="value">
+                            <input class="input--style-6" type="text" name="outletName" placeholder="Outlet Name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">Location</div>
+                        <div class="value">
+                            <div class="input-group">
+                                <input class="input--style-6" type="location" name="location" placeholder="Location">
+                            </div>
+                        </div>
+                    </div>
                     
+                    <div class="form-row">
+                        <div class="name">Description</div>
+                        <div class="value">
+                            <div class="input-group">
+                                <textarea class="textarea--style-6" name="description" placeholder="Short description about outlet"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">Upload Image</div>
+                        <div class="value">
+                            <div class="input-group js-input-file">
+                                <input class="input-file" type="file" name="file_cv" id="file">
+                                <label class="label--file" for="file">Choose file</label>
+                                <span class="input-file__info">No file chosen</span>
+                            </div>
+                            <div class="label--desc">Upload image.... Max file size 50 MB</div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                      <button class="btn btn--radius-2 btn--blue-2" type="submit">Add outlet</button>
+                  </div>
                 </form> -->
           </div>
 

@@ -100,9 +100,6 @@ DATABASES = {
 
 MEDIA_URL = '/media/' 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-RAZORPAY_KEY_ID = "rzp_test_6yMxXP2rZCP9LR"
-RAZORPAY_KEY_SECRET = "eduwKDCU9ssGOqgIlyb9LCNJ"
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 

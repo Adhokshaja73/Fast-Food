@@ -22,9 +22,7 @@
     <meta content="" name="keywords">
 
     <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <!-- Favicons -->
@@ -69,28 +67,26 @@
 
     <header id="header" class="fixed-top d-flex align-items-cente">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
-
+    
             <h1 class="logo me-auto me-lg-0"><a href="adminshop.html">FASTFOOD</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
+    
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
                     <pre>                                                                               </pre>
                     <li><a class="nav-link scrollto" href="http://127.0.0.1:8000/adminshop.html">Home</a></li>
-
+                    
                     <li>
-                    <li><a href=".html"><span>Manage Orders</span> <i></i></a></li>
-                    <pre> </pre>
+                        <li><a href=".html"><span>Manage Orders</span> <i ></i></a></li>
+                        <pre> </pre>
                     </li>
                     <li>
                         <ul>
-                            <li class="dropdown"><a href="#"><span>My Account</span> <i
-                                        class="bi bi-chevron-right"></i></a>
+                            <li class="dropdown"><a href="#"><span>My Account</span> <i class="bi bi-chevron-right"></i></a>
                                 <ul>
                                     <li><a href="shop_profile">My profile</a></li>
-                                    <li><a href="logout"><button class="book-a-table-btn scrollto d-none d-lg-flex"
-                                                style="background-color: rgb(13, 13, 21);">LOGOUT</button></a></li>
+                                    <li><a href="logout"><button class="book-a-table-btn scrollto d-none d-lg-flex" style="background-color: rgb(13, 13, 21);">LOGOUT</button></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -100,12 +96,12 @@
             </nav>
             <!-- .navbar -->
             <ul>
-
+    
             </ul>
-
+    
         </div>
     </header>
-
+   
     <!-- End Header -->
 
     <!-- ======= Hero Section ======= -->
@@ -121,43 +117,60 @@
                         <h6 class="title">Add Item Details</h6>
                     </div>
                     <div class="card-body">
-
+                        {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                          {% for field, errors in form.errors.items %}
+                          {% for error in errors %}
+                          <b>{{ field }}</b>: {{ error }}
+                          {% endfor %}
+                          {% endfor %}
+                        </div>
+                        {% endif %}
                         <form enctype="multipart/form-data" method="POST" action="">
-                            {% csrf_token %}
+                          {% csrf_token %}
+                          {{ form.media }}
+                          {{ form.as_p }}
+                          <input type="submit" value="Submit">
+                        </form>
+                        <!-- <form method="POST">
                             <div class="form-row">
                                 <div class="name">Item name</div>
                                 <div class="value">
-                                    {{ form.name }}
+                                    <input class="input--style-6" type="text" name="item name" placeholder="Item Name">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="name">Price</div>
                                 <div class="value">
-                                    {{ form.price }}
+                                    <div class="input-group">
+                                        <input class="input--style-6" type="location" name="price" placeholder="Price">
+                                    </div>
                                 </div>
                             </div>
-
                             <div class="form-row">
-                                <div class="name">Category</div>
+                                <div class="name">Description</div>
                                 <div class="value">
-                                    {{ form.category }}
-
+                                    <div class="input-group">
+                                        <textarea class="textarea--style-6" name="description" placeholder="Short description about outlet"></textarea>
+                                    </div>
                                 </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="name">Upload Image</div>
-                                {{ form.image }}
+                                <div class="value">
+                                    <div class="input-group js-input-file">
+                                        <input class="input-file" type="file" name="file_cv" id="file">
+                                        <label class="label--file" for="file">Choose file</label>
+                                        <span class="input-file__info">No file chosen</span>
+                                    </div>
+                                    <div class="label--desc">Upload image.... Max file size 50 MB</div>
+                                </div>
                             </div>
-                            <div class="card-footer">
-                                <button class="btn btn--radius-2 btn--blue-2" type="submit">Add</button>
-                            </div>
-                        </form>
-                        <!-- <form method="POST">
-                           
                         </form> -->
                     </div>
-
+                    <div class="card-footer">
+                        <button class="btn btn--radius-2 btn--blue-2" type="submit">Add</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -241,8 +254,7 @@
     <!-- End Footer -->
 
     <div id="preloader"></div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
     <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
