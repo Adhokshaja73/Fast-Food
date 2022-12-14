@@ -8,7 +8,6 @@ from hashlib import sha256
 from .models import Payments, User
 
 from .forms import *
-import razorpay
 
 
 

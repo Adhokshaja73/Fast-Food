@@ -92,9 +92,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fastfood',
-        'USER'  : 'root',
+        'USER'  : 'admin',
         'PASSWORD' : 'asdf1234',
-        'HOST' : 'localhost',
+        'HOST' : 'covid19-database.cc8si5akkdcf.us-east-1.rds.amazonaws.com',
     }
 }
 
