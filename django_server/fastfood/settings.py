@@ -91,10 +91,10 @@ WSGI_APPLICATION = 'fastfood.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fastfood',
+        'NAME': 'fast_food',
         'USER'  : 'admin',
         'PASSWORD' : 'asdf1234',
-        'HOST' : 'covid19-database.cc8si5akkdcf.us-east-1.rds.amazonaws.com',
+        'HOST' : 'fast-food-dbs.caflfvf36axr.us-east-1.rds.amazonaws.com',
     }
 }
 
